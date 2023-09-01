@@ -1,0 +1,53 @@
+<?php
+
+return [
+    'routes' => [
+        'home' => 'anasayfa',
+        'about' => 'hakkimizda',
+        'menu' => 'menu',
+        'gallery' => 'foto-galeri',
+        'blog' => 'blog',
+        'reservation' => 'rezervasyon',
+        'contact' => 'iletisim',
+    ],
+    'url' => [
+        'anasayfa' => 'home',
+        'hakkimizda' => 'about',
+        'menu' => 'menu',
+        'foto-galeri' => 'gallery',
+        'blog' => 'blog',
+        'rezervasyon' => 'reservation',
+        'iletisim' => 'contact',
+
+    ],
+
+    'home' => 'ANA SAYFA',
+    'about' => 'HAKKIMIZDA',
+    'gallery' => 'FOTO GALERİ',
+    'contact' => 'İLETİŞİM',
+    'menu' => 'MENU',
+    'blog' => 'BLOG',
+    'booking' => 'REZERVASYON',
+    'name' => 'AD SOYAD',
+    'phone' => 'TELEFON NO',
+    'email' => 'EMAIL ADRESİ',
+    'branch1' => 'ŞUBE SEÇ',
+    'guest_number' => 'MİSAFİR SAYISI',
+    'date' => 'TARİH SEÇİNİZ',
+    'time' => 'SAAT SEÇİNİZ',
+    'submit' => 'REZERVASYON YAP',
+    "pages" => "Sayfalar",
+    "contactus" => "İletişime Geç",
+    'get_in_touch' => 'İletişime Geçin',
+    'book_a_table' => 'REZERVASYON',
+    'opening_hour' => 'Çalışma Saatleri',
+    'view_more' => 'Daha Fazla',
+    'food_menu' => 'Menü',
+    'details' => 'Detay',
+    'branches' => 'Şubelerimiz',
+    'branch' => 'Şube',
+    'all' => 'Tümü',
+    'categories' => 'Kategoriler',
+    'recent_posts' => 'Son Yazılar',
+
+];

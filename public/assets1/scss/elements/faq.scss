@@ -1,0 +1,175 @@
+// faq style hear
+
+// Faq area start
+.rts-faq-area{
+    padding: 470px 0 0 0;
+    .first{
+        @media(max-width:991px){
+            order: 2;
+        }
+    }
+    .about-one-img{
+        position: relative;
+        .thumbnail-1{
+            position: relative;
+            max-width: unset;
+            z-index: 1;
+            text-align: end;
+            @media #{$small-mobile} {
+                img{
+                    width: 100%;
+                }
+            }
+            .line{
+                position: absolute;
+                left: 15px;
+                top: 35px;
+                display: flex;
+                width: 105%;
+                align-items: center;
+                transform: scaleX(-1);
+                @media #{$large-mobile} {
+                    right: -106px;
+                }
+                @media #{$small-mobile} {
+                    display: none;
+                }
+                h3{
+                    font-size: 86px;
+                    color: var(--color-primary);
+                }
+                .small-st{
+                    display: flex;
+                    flex-direction: column;
+                    span.plus{
+                        color: var(--color-primary);
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                    span{
+                        color: #000000;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+        }
+        .thumbnail-2{
+            position: absolute;
+            top: 100px;
+            right: unset;
+            z-index: 2;
+            left: 60px;
+            @media(max-width:1200px) and (min-width:991px){
+                left: 0;
+            }
+            @media #{$small-mobile} {
+                display: none;
+            }
+            span{
+                position: absolute;
+                min-width: max-content;
+                right: -65px;
+                top: -65px;
+                padding: 8px 30px;
+                color: #fff;
+                letter-spacing: 0.1em;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 24px;
+                animation: rotateIt-2 infinite 14s linear;
+                img{
+                    border: none;
+                }
+            }
+            img{
+                border: 10px solid #fff;
+                @media #{$small-mobile} {
+                    width: 60%;
+                }
+            }
+        }
+    }
+    .banner-one-wrapper{
+        .title-banner{
+            text-align: left;
+            font-size: 50px;
+            line-height: 58px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            @media(max-width:1200px) and (min-width:991px){
+                font-size: 45px;
+                line-height: 1.1;
+            }
+            @media (max-width: 575px){
+                font-size: 30px;
+                line-height: 45px;
+            }
+        }
+        .desc{
+            text-align: left;
+            font-size: 18px;
+            line-height: 27px;
+            @media(max-width:1200px) and (min-width:991px){
+                br{
+                    display: none;
+                }
+            }
+            @media #{$small-mobile} {
+                br{
+                    display: none;
+                }
+            }
+        }
+    }
+    .accordion-two{
+        margin-top: 50px;
+        .accordion-item{
+            border: none;
+            background: transparent;
+            background-color: transparent;
+            .accordion-header{
+                .accordion-button{
+                    background: none;
+                    border: none;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 26px;
+                    color: #000000;
+                    padding: 12px 20px;
+                    &.collapsed{
+                        border-width: 1px 0;
+                        border-style: solid;
+                        border-color: #EAEAEA;
+                    }
+                    &:focus{
+                        box-shadow: none;
+
+                    }
+                    &::after{
+                        background-image: none;
+                        content: '\2b';
+                        margin-top: 0px;
+                        padding: 18px;
+                        background: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 24px;
+                        color: #999999;
+                    }
+                    &[aria-expanded="true"]{
+                        &::after{
+                            transform: none;
+                            content: '\f068';
+                            font-family: 'Font Awesome 6 Pro';
+                            font-weight: 400;
+                            font-size: 18px;
+                            color: var(--color-primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

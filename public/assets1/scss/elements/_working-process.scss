@@ -1,0 +1,115 @@
+// single working process
+.rts-deal-section{
+    background: url(../images/bg/banner3.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    .shape-image-1{
+        position: absolute;
+        right: 0;
+        top: -150px;
+        animation: jump-vertical 10s linear infinite;
+    }
+    .rts-deal-section-inner{
+        .banner-one-wrapper{
+            @media(max-width:991px){
+                margin-bottom: 100px;
+            }
+            .title-banner{
+                color: #FFFFFF;
+                font-size: 50px;
+                line-height: 58px;
+                margin-bottom: 25px;
+                text-align: center;
+                transition-delay: .5s;
+                @media(max-width:500px){
+                    font-size: 38px;
+                    line-height: 48px;
+                    br{
+                        display: none;
+                    }
+                }
+            }
+            .banner-shape-area{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0;
+                margin-bottom: 25px;
+                transition-delay: .8s;
+                .shape{
+                    height: 10px;
+                    width: 10px;
+                    line-height: 10px;
+                    transform: rotate(45deg);
+                    margin: 0 6px;
+                    background: #e58140;
+                    display: block;
+                }
+            }
+            .desc{
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 18px;
+                line-height: 27px;
+                transition-delay: 1s;
+                @media(max-width:1200px) and (min-width:991px){
+                    br{
+                        display: none;
+                    }
+                }
+                @media (max-width:576px){
+                    br{
+                        display: none;
+                    }
+                }
+            }
+            .button-area-banner{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition-delay: 2s;
+                @media #{$large-mobile} {
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: flex-start;
+                }
+                .rts-btn.btn-secondary{
+                    border-color: #FFFFFF;
+                    border-width: 2px;
+                    background: #FFFFFF;
+                    &:hover{
+                        background: none;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+        .hero-image-section{
+            position: relative;
+            margin-left: 50px;
+            z-index: 1;
+            @media(max-width:991px){
+                margin-left: 0;
+            }
+            img{
+                width: 100%;
+            }
+            span{
+                position: absolute;
+                top: 10px;
+                left: 25px;
+                animation: rotateIt-2 infinite 14s linear;
+            }
+            .shape-img{
+                position: absolute;
+                top: -15px;
+                right: -20px;
+                z-index: -1;
+            }
+        }
+    }
+}
