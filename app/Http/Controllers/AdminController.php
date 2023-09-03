@@ -366,9 +366,7 @@ class AdminController extends Controller
     public function update_photo(Request $request, $id)
     {
         try {
-            $request->validate([
-                'img1' => 'max:10000',
-            ]);
+
             if ($request->is_active == "on") {
                 $is_active = 1;
             } else {
