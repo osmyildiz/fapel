@@ -54,7 +54,7 @@
                                 <label for="img1"></label>
                                 <div class="media">
                                     <div class="me-3">
-                                        <img src="{{asset($photo->url)}}" alt=""
+                                        <img src="{{asset($photo->image_path)}}" alt=""
                                              style="display:block;" width="100" height="70">
                                     </div>
                                     <div class="input-group">
