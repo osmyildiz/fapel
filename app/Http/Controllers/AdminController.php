@@ -372,7 +372,7 @@ class AdminController extends Controller
             }
 
             $photo = Gallery::find($id);
-            $category_name = GalleryCategory::find($photo->category_id);
+            $category_name = GalleryCategory::find($request->category);
 
             if ($request->hasFile('img1')) {
 
