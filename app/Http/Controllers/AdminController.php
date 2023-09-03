@@ -399,7 +399,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             // log the error
             Log::error($e);
-            print_r($e);
+
             return back()->with('danger', 'An error occurred: ' . $e->getMessage());
         }
     }
