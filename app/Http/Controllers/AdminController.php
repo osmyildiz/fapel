@@ -374,6 +374,7 @@ class AdminController extends Controller
 
         $photo = Gallery::find($id);
         if($request->hasFile('img1')) {
+
             $id = mt_rand(1000, 9999);
             $imageName = $id."_".time().'.'.$request->img1->extension();
             $image = Image::make($request->img1);
@@ -384,9 +385,7 @@ class AdminController extends Controller
         $photo->category_id = $request->category;
         $photo->is_active = $is_active;
 
-        print_r($photo);
-        print_r($request->all());
-        die();
+
 
         $save = $photo->save();
 
