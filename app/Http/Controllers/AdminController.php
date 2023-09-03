@@ -362,41 +362,41 @@ class AdminController extends Controller
         return back()->with('danger', 'An unexpected error occured. Please try again.!!');
 
     }
-    public function update_photo(Request $request,$id)
+    public function update_photo(Request $request, $id)
     {
+        try {
+            if ($request->is_active == "on") {
+                $is_active = 1;
+            } else {
+                $is_active = 0;
+            }
 
+            $photo = Gallery::find($id);
 
-        if($request->is_active=="on"){
-            $is_active =1;
-        }else{
-            $is_active =0;
+            if ($request->hasFile('img1')) {
+                $id = mt_rand(1000, 9999);
+                $imageName = $id . "_" . time() . '.' . $request->img1->extension();
+                $image = Image::make($request->img1);
+                //$image->fit(1400, 630);
+                $image->save(public_path("/assets1/images/gallery/" . $imageName));
+                $photo->image_path = "/assets1/images/gallery/" . $imageName;
+            }
+
+            $photo->category_id = $request->category;
+            $photo->is_active = $is_active;
+
+            $save = $photo->save();
+
+            if ($save) {
+                return back()->with('success', 'Görsel güncellendi.');
+            }
+
+            return back()->with('danger', 'An unexpected error occured. Please try again.!!');
+        } catch (\Exception $e) {
+            // log the error
+            Log::error($e);
+            return back()->with('danger', 'An error occurred: ' . $e->getMessage());
         }
-
-        $photo = Gallery::find($id);
-        if($request->hasFile('img1')) {
-
-            $id = mt_rand(1000, 9999);
-            $imageName = $id."_".time().'.'.$request->img1->extension();
-            $image = Image::make($request->img1);
-            //$image->fit(1400, 630);
-            $image->save(public_path("/assets1/images/gallery/" . $imageName));
-            $photo->image_path = "/assets1/images/gallery/".$imageName;
-        }
-        $photo->category_id = $request->category;
-        $photo->is_active = $is_active;
-
-
-
-        $save = $photo->save();
-
-        if($save){
-            return back()->with('success', 'Görsel güncellendi.');
-
-        }
-
-        return back()->with('danger', 'An unexpected error occured. Please try again.!!');
-
-
     }
     public function edit_photo(Request $request,$id)
     {
