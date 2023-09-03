@@ -22,7 +22,6 @@ use App\Models\Testimonial;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -366,7 +365,6 @@ class AdminController extends Controller
     public function update_photo(Request $request, $id)
     {
         try {
-
             if ($request->is_active == "on") {
                 $is_active = 1;
             } else {
@@ -376,13 +374,21 @@ class AdminController extends Controller
             $photo = Gallery::find($id);
 
             if ($request->hasFile('img1')) {
-                $id = mt_rand(1000, 9999);
-                $imageName = "test" . "_" . time() . '.webp';
-                $image = Image::make($request->img1);
-                $image = $image->encode('webp', 80);
-                $image->save(public_path("/assets1/images/gallery/" . $imageName));
-                $photo->image_path = "/assets1/images/gallery/" . $imageName;
+                try {
+                    $id = mt_rand(1000, 9999);
+                    $imageName = $id . "_" . time() . '.webp';
+                    $image = Image::make($request->img1);
+                    $image = $image->encode('webp', 80);
+                    $image->save(public_path("/assets1/images/gallery/" . $imageName));
+                    $photo->image_path = "/assets1/images/gallery/" . $imageName;
+                } catch (\Exception $e) {
+                    // Hata oluştuğunda bu bloğa girer
+                    return back()->with('danger', 'An error occurred: ' . $e->getMessage());
+                }
             }
+
+
+
             $photo->category_id = $request->category;
             $photo->is_active = $is_active;
 
@@ -396,7 +402,6 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             // log the error
             Log::error($e);
-
             return back()->with('danger', 'An error occurred: ' . $e->getMessage());
         }
     }
