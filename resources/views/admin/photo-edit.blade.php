@@ -32,16 +32,16 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <h4 class="card-title mb-4">EDIT PHOTO</h4>
+                        <h4 class="card-title mb-4">Görsel Güncelle</h4>
                         <div class="row">
 
                             <div class="mb-4 row">
-                                <label for="time" class="col-md-3 col-form-label">CATEGORY</label>
+                                <label for="time" class="col-md-3 col-form-label">Kategori</label>
 
                                 <div class="col-sm-4">
                                     <select id="time" class="form-select" name="category">
                                         @foreach($kategori_all as $kategorix)
-                                            <option value="{{$kategorix->id}}" {{$kategorix->id==$kategori->id?"selected":""}}>{{$kategorix->name}}</option>
+                                            <option value="{{$kategorix->id}}" {{$kategorix->id==$kategori->id?"selected":""}}>{{$kategorix->name_tr}}</option>
                                         @endforeach
                                     </select>
 
@@ -71,7 +71,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="is_active" name="is_active"  {{$photo->is_active ==1?"checked":""}}>
                                 <label class="form-check-label" for="is_active">
-                                    Active/Inactive
+                                    Aktif/Pasif
                                 </label>
                             </div>
                             <div class="row justify-content-end">
@@ -79,7 +79,7 @@
 
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary w-md">UPDATE</button>
+                                        <button type="submit" class="btn btn-primary w-md">GÜNCELLE</button>
                                     </div>
                                 </div>
                             </div>

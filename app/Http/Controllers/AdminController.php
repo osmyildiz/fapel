@@ -337,8 +337,8 @@ class AdminController extends Controller
                 $id = mt_rand(100, 999);
                 $file_name = preg_replace('/(.*)\\.[^\\.]*/', '$1', $file->getClientOriginalName());
                 $name = $file_name."-".$id.'.'.$file->extension();
-                $file->move(public_path('/assets1/img/gallery/'), $name);
-                $url = "/assets1/img/gallery/".$name;
+                $file->move(public_path('/assets1/images/gallery/'), $name);
+                $url = "/assets1/images/gallery/".$name;
                 $save=Gallery::insert([
                     'image_path' => $url,
                     'category_id' => $request->category,
@@ -373,12 +373,13 @@ class AdminController extends Controller
         }
 
         $photo = Gallery::find($id);
-        if($request->hasFile('img1')){
+        if($request->hasFile('img1')) {
             $id = mt_rand(1000, 9999);
             $imageName = $id."_".time().'.'.$request->img1->extension();
-
-            $request->img1->move(public_path('photos'), $imageName);
-            $photo->url = "/photos/".$imageName;
+            $image = Image::make($request->img1);
+            //$image->fit(1400, 630);
+            $image->save(public_path("/assets1/images/gallery/" . $imageName));
+            $photo->image_path = "/assets1/images/gallery/".$imageName;
         }
         $photo->category_id = $request->category;
         $photo->is_active = $is_active;
@@ -386,7 +387,7 @@ class AdminController extends Controller
         $save = $photo->save();
 
         if($save){
-            return back()->with('success', 'Photo has been updated');
+            return back()->with('success', 'Görsel güncellendi.');
 
         }
 
