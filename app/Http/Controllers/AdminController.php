@@ -11,7 +11,6 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Form;
 use App\Models\Gallery;
-use App\Models\Gallery_category;
 use App\Models\GalleryCategory;
 use App\Models\Menu;
 use App\Models\MenuCategory;
@@ -399,8 +398,8 @@ class AdminController extends Controller
     {
 
         $photo = Gallery::find($id);
-        $kategori = Gallery_category::where('id',$photo->category_id)->first();
-        $kategori_all = Gallery_category::get();
+        $kategori = GalleryCategory::where('id',$photo->category_id)->first();
+        $kategori_all = GalleryCategory::get();
 
         return view('admin.photo-edit',compact('photo','kategori_all','kategori'));
 
