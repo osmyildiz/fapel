@@ -379,8 +379,8 @@ class AdminController extends Controller
                 $id = mt_rand(1000, 9999);
                 $imageName = $id . "_" . time() . '.webp';
                 $image = Image::make($request->img1);
-                //$image->fit(1400, 630);
-                $image->save(public_path("/assets1/images/gallery/" . $imageName), 80, 'webp');
+                $image = $image->encode('webp', 80);
+                $image->save(public_path("/assets1/images/gallery/" . $imageName));
                 $photo->image_path = "/assets1/images/gallery/" . $imageName;
             }
 
