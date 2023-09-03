@@ -376,7 +376,7 @@ class AdminController extends Controller
             if ($request->hasFile('img1')) {
                 try {
                     $id = mt_rand(1000, 9999);
-                    $imageName = $id . "_" . time() . '.webp';
+                    $imageName =  "Test_" . time() . '.webp';
                     $image = Image::make($request->img1);
                     $image = $image->encode('webp', 80);
                     $image->save(public_path("/assets1/images/gallery/" . $imageName));
