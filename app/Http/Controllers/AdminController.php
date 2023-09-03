@@ -383,6 +383,7 @@ class AdminController extends Controller
                     });
                     $image = $image->encode('webp', 60);
 
+
                     $image->save(public_path("/assets1/images/gallery/" . $imageName));
                     $photo->image_path = "/assets1/images/gallery/" . $imageName;
                 } catch (\Exception $e) {
