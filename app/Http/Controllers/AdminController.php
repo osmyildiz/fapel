@@ -384,6 +384,10 @@ class AdminController extends Controller
         $photo->category_id = $request->category;
         $photo->is_active = $is_active;
 
+        print_r($photo);
+        print_r($request->all());
+        die();
+
         $save = $photo->save();
 
         if($save){
