@@ -22,6 +22,7 @@ use App\Models\Testimonial;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -398,6 +399,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             // log the error
             Log::error($e);
+            print_r($e);
             return back()->with('danger', 'An error occurred: ' . $e->getMessage());
         }
     }
