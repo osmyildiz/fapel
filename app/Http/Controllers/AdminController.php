@@ -367,7 +367,7 @@ class AdminController extends Controller
     {
         try {
             $request->validate([
-                'img1' => 'max:4096',
+                'img1' => 'max:10000',
             ]);
             if ($request->is_active == "on") {
                 $is_active = 1;
