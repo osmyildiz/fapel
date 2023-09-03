@@ -365,6 +365,9 @@ class AdminController extends Controller
     public function update_photo(Request $request, $id)
     {
         try {
+            $request->validate([
+                'img1' => 'max:4096',
+            ]);
             if ($request->is_active == "on") {
                 $is_active = 1;
             } else {
@@ -378,7 +381,7 @@ class AdminController extends Controller
                 $imageName = $id . "_" . time() . '.' . $request->img1->extension();
                 $image = Image::make($request->img1);
                 //$image->fit(1400, 630);
-                $image->save(public_path("/assets1/images/gallery/" . $imageName));
+                $image->save(public_path("/assets1/images/gallery/" . $imageName . '.webp'), 80, 'webp');
                 $photo->image_path = "/assets1/images/gallery/" . $imageName;
             }
 
