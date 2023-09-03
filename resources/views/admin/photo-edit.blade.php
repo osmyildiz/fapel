@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title') EDIT PHOTO ADMIN PANEL @endsection
+@section('title') GÖRSEL GÜNCELLE ADMIN PANEL @endsection
 
 @section('css')
     <!-- DataTables -->
@@ -11,7 +11,7 @@
 
     @component('admin.components.breadcrumb')
         @slot('li_1') Admin Panel @endslot
-        @slot('title') EDIT PHOTO @endslot
+        @slot('title') GÖRSEL GÜNCELLE @endslot
     @endcomponent
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
