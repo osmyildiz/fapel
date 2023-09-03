@@ -372,21 +372,21 @@ class AdminController extends Controller
             }
 
             $photo = Gallery::find($id);
+            $category_name = GalleryCategory::find($photo->category_id);
 
             if ($request->hasFile('img1')) {
-                try {
-                    if($request->hasFile('img1')){
-                        $id = mt_rand(1000, 9999);
-                        $imageName = $id."test_".time().'.'.$request->img1->extension();
 
-                        $request->img1->move(public_path("/assets1/images/gallery/"), $imageName);
-                        $photo->image_path = "/assets1/images/gallery/".$imageName;
-                    }
-                } catch (\Exception $e) {
-                    // Hata oluştuğunda bu bloğa girer
-                    return back()->with('danger', 'An error occurred: ' . $e->getMessage());
-                }
+                    $id = mt_rand(1000, 9999);
+                    $prefix = Str::slug($category_name->name_en);
+                    $imageName =  "fapel_restaurant_".$prefix."_image_" . time() . '.webp';
+                    $image = Image::make($request->img1);
+                    //$image =Image::make($request->img1)->resize(1024, 768);
+                    $image = $image->encode('webp', 80);
+                    $image->save(storage_path("app/public/images/gallery/" . $imageName));
+                    $photo->image_path = "/storage/images/gallery/" . $imageName;
+
             }
+
 
 
             $photo->category_id = $request->category;
