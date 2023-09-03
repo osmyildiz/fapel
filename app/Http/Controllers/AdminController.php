@@ -381,7 +381,7 @@ class AdminController extends Controller
                     $image->resize(800, null, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-                    $image = $image->encode('webp', 80);
+                    $image = $image->encode('webp', 60);
 
                     $image->save(public_path("/assets1/images/gallery/" . $imageName));
                     $photo->image_path = "/assets1/images/gallery/" . $imageName;
