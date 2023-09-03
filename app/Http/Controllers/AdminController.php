@@ -379,12 +379,13 @@ class AdminController extends Controller
 
             if ($request->hasFile('img1')) {
                 $id = mt_rand(1000, 9999);
-                $imageName = $id . "_" . time() . '.' . $request->img1->extension();
+                $imageName = $id . "_" . time() . '.webp';
                 $image = Image::make($request->img1);
                 //$image->fit(1400, 630);
-                $image->save(public_path("/assets1/images/gallery/" . $imageName . '.webp'), 80, 'webp');
+                $image->save(public_path("/assets1/images/gallery/" . $imageName), 80, 'webp');
                 $photo->image_path = "/assets1/images/gallery/" . $imageName;
             }
+
 
             $photo->category_id = $request->category;
             $photo->is_active = $is_active;
