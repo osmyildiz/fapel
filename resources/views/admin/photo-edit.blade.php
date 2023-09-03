@@ -36,7 +36,7 @@
                         <div class="row">
 
                             <div class="mb-4 row">
-                                <label for="time" class="col-md-3 col-form-label">Kategori</label>
+                                <label for="category" class="col-md-3 col-form-label">Kategori</label>
 
                                 <div class="col-sm-4">
                                     <select id="time" class="form-select" name="category">
