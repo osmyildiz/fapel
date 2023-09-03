@@ -378,11 +378,11 @@ class AdminController extends Controller
                     $id = mt_rand(1000, 9999);
                     $imageName =  "Test_" . time() . '.webp';
                     $image = Image::make($request->img1);
-
-                    if (!$image) {
-                        return back()->with('danger', 'Resim dosyası açılamadı.');
-                    }
+                    $image->resize(800, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
                     $image = $image->encode('webp', 80);
+
                     $image->save(public_path("/assets1/images/gallery/" . $imageName));
                     $photo->image_path = "/assets1/images/gallery/" . $imageName;
                 } catch (\Exception $e) {
