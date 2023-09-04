@@ -67,7 +67,7 @@
                     <div class="right-side-image">
                         <div class="reveal-item overflow-hidden aos-init">
                             <div class="reveal-animation reveal-end reveal-primary aos aos-init" data-aos="reveal-end"></div>
-                            <img src="{{ asset('assets1/images/contact/bg-01.jpg') }}" alt="contact">
+                            <img src="{{ asset('assets1/images/contact/fapel-sube.webp') }}" alt="contact">
                         </div>
                     </div>
                 </div>

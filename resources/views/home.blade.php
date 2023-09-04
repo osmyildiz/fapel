@@ -417,7 +417,7 @@
                                 <div class="blog-wrapper">
                                     <div class="image-part">
                                         <!-- Resim yolu şu an eksik, eğer bir 'image_path' veya benzeri bir alanınız varsa burada kullanabilirsiniz -->
-                                        <img src="{{ asset($blog->img_home) ?? asset('assets1/images/blog/blog-01.jpg') }}" alt="blog">
+                                        <img src="{{ asset($blog->img) ?? asset('assets1/images/blog/blog-01.jpg') }}" alt="blog">
                                     </div>
                                     <span class="blog-badge"> {{ $blog->updated_at->format('F j, Y') }}</span>
                                     <div class="content">
