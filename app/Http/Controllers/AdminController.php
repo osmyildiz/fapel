@@ -387,7 +387,6 @@ class AdminController extends Controller
                 $photo->image_path = "/assets1/images/gallery/" . $imageName;
 
             }
-
             //test
             $photo->category_id = $request->category;
             $photo->is_active = $is_active;
