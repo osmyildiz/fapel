@@ -389,7 +389,8 @@
     <!-- gallery area end -->
 
     <!-- blog area start -->
-    <div class="rts-blog-area rts-section-gap">
+    <!--<div class="rts-blog-area rts-section-gap">-->
+    <div class="rts-blog-area ">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-12">
