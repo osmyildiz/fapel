@@ -221,11 +221,12 @@ class AdminController extends Controller
 
         if($request->hasFile('img')) {
             $id = mt_rand(1000, 9999);
-            $imageName = $id."_".time().'.'.$request->img->extension();
+            $imageName = "fapel-home-page-slider-".$id."-".time();
             $image = Image::make($request->img);
+            $image->encode('webp', 80);
             $image->fit(1400, 630);
-            $image->save(public_path("/assets1/images/" . $imageName));
-            $slider->img = "/assets1/images/".$imageName;
+            $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
+            $slider->img = "/assets1/images/slider/".$imageName .'.webp';
         }
 
         if($slider->save()){
@@ -262,11 +263,12 @@ class AdminController extends Controller
 
         if($request->hasFile('img')) {
             $id = mt_rand(1000, 9999);
-            $imageName = $id."_".time().'.'.$request->img->extension();
+            $imageName = "fapel-".$slider->page_name."-page-slider-".$id."-".time();
             $image = Image::make($request->img);
+            $image->encode('webp', 80);
             $image->fit(1400, 630);
-            $image->save(public_path("/assets1/images/" . $imageName));
-            $slider->img = "/assets1/images/".$imageName;
+            $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
+            $slider->img = "/assets1/images/slider/".$imageName .'.webp';
         }
 
         $save = $slider->save();
