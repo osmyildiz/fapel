@@ -508,7 +508,7 @@ class AdminController extends Controller
     {
 
         if($id==2){
-            $kategori_all = MenuCategory::where('id', '!=', 1)->orderBy('id', 'ASC')->get();
+            $kategori_all = MenuCategory::where('id', '!=', 1)->orderBy('priority', 'ASC')->get();
 
             if(count($kategori_all)>0){
                 $kategori1 = $kategori_all[0];
@@ -735,6 +735,7 @@ class AdminController extends Controller
     public function update_foodtype(Request $request, $id)
     {
         // Validate the request with your rules
+
         $request->validate([
             'name_tr' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
@@ -742,9 +743,9 @@ class AdminController extends Controller
             'description_tr' => 'nullable|string|max:255',
             'description_en' => 'nullable|string|max:255',
             'description_ar' => 'nullable|string|max:255',
-            'priority' => 'required|integer',
-            'is_active' => 'nullable|boolean',
+
         ]);
+
 
         $is_active = $request->is_active == "on" ? 1 : 0;
         $foodtype = MenuCategory::find($id);

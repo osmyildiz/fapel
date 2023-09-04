@@ -41,6 +41,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="name_tr" name="name_tr" value="{{$res->name_tr}}">
                             </div>
+                            @error('name_tr')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-4 row">
@@ -48,6 +51,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="name_en" name="name_en" value="{{$res->name_en}}">
                             </div>
+                            @error('name_en')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-4 row">
@@ -55,6 +61,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="name_ar" name="name_ar" value="{{$res->name_ar}}">
                             </div>
+                            @error('name_ar')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Description fields for TR, EN, AR -->
@@ -64,6 +73,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="description_tr" name="description_tr" value="{{$res->description_tr ?? ''}}">
                             </div>
+                            @error('description_tr')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-4 row">
@@ -71,6 +83,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="description_en" name="description_en" value="{{$res->description_en ?? ''}}">
                             </div>
+                            @error('description_en')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-4 row">
@@ -78,6 +93,9 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" id="description_ar" name="description_ar" value="{{$res->description_ar ?? ''}}">
                             </div>
+                            @error('description_ar')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Priority and IsActive fields as they were -->
@@ -86,6 +104,7 @@
                             <div class="col-sm-9">
                                 <input class="form-control" type="number" id="priority" name="priority" value="{{$res->priority}}">
                             </div>
+
                         </div>
 
                         <div class="row mb-4">
