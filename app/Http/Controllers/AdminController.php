@@ -329,16 +329,25 @@ class AdminController extends Controller
         $priority=Gallery::selectRaw('max(priority) as pri')->get();
         $pri = $priority[0]->pri;
 
+        $category = GalleryCategory::find($request->category);
+
 
         if($files = $request->file('image')){
 
 
             foreach($files as $key=>$file){
-                $id = mt_rand(100, 999);
-                $file_name = preg_replace('/(.*)\\.[^\\.]*/', '$1', $file->getClientOriginalName());
-                $name = $file_name."-".$id.'.'.$file->extension();
-                $file->move(public_path('/assets1/images/gallery/'), $name);
-                $url = "/assets1/images/gallery/".$name;
+                $id = mt_rand(100, 9999);
+
+                $prefix = Str::slug($category->name_en);
+                $imageName =  "fapel-restaurant-".$prefix."-image-".$id."-" . time() . '.webp';
+                $image = Image::make($file)->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image = $image->encode('webp', 80);
+                $image->save(public_path("assets1/images/gallery/" . $imageName));
+                $url = "/assets1/images/gallery/" . $imageName;
+
+
                 $save=Gallery::insert([
                     'image_path' => $url,
                     'category_id' => $request->category,
@@ -943,7 +952,7 @@ class AdminController extends Controller
         // Resim dosyasını işleyelim
         if ($request->hasFile('img')) {
             // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($validatedData['title_tr']); // Başlığı URL dostu formatına dönüştürür
+            $nameSlug = Str::slug($validatedData['title_tr']);
 
             // Dosya uzantısı
             $extension = $request->img->extension();
@@ -954,7 +963,8 @@ class AdminController extends Controller
             // Resmi işle
             $image = Image::make($request->img);
             //$image->fit(500, 500);
-            $image->save(public_path("/assets1/images/blog/" . $imageName));
+            $image->encode('webp', 80);
+            $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
 
             // img_home için 420x420 boyutunda resim oluştur
             $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999) . '.' . $extension;
@@ -963,16 +973,18 @@ class AdminController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName));
+            $imageHome->encode('webp', 80);
+            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.webp'));
 
             // Dosya yolunu kaydet
-            $blog->img = "/assets1/images/blog/" . $imageName;
-            $blog->img_home = "/assets1/images/blog/" . $imageHomeName;
+            $blog->img = "/assets1/images/blog/" . $imageName . '.webp';
+            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.webp';
 
         }else{
             $blog->img="/assets1/images/blog/blog-default.jpg";
             $blog->img_home="/assets1/images/blog/blog-default.jpg";
         }
+
 
 
         $blog->priority = $validatedData['priority'] ?? 0; // Varsa değeri al, yoksa 0
