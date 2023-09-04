@@ -458,7 +458,7 @@
                                         <td>{{$blog->title_ar}}</td>
                                         <td>{!! html_entity_decode((mb_substr($blog->content_tr, 0, 200))) !!}...</td>
                                         <td>{!! html_entity_decode((mb_substr($blog->content_en, 0, 200))) !!}...</td>
-                                        <td>{!! Str::limit(strip_tags(htmlspecialchars_decode($blog->content_ar)), 200) !!}</td>
+                                        <td>{!! mb_substr(strip_tags(htmlspecialchars_decode($blog->content_ar)), 0,200) !!}</td>
 
 
                                         <td>{{$blog->is_active == 1 ? "Aktif" : "Pasif"}}</td>
