@@ -954,11 +954,8 @@ class AdminController extends Controller
             // Adı Seo uyumlu yap
             $nameSlug = Str::slug($validatedData['title_tr']);
 
-            // Dosya uzantısı
-            $extension = $request->img->extension();
-
             // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_". mt_rand(1000, 9999) . '.' . $extension;
+            $imageName = $nameSlug . "_". mt_rand(1000, 9999);
 
             // Resmi işle
             $image = Image::make($request->img);
@@ -967,7 +964,7 @@ class AdminController extends Controller
             $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
 
             // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999) . '.' . $extension;
+            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999);
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
@@ -1110,36 +1107,37 @@ class AdminController extends Controller
 
         if ($request->hasFile('img')) {
             // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($request->title_tr); // Başlığı URL dostu formatına dönüştürür
+            $nameSlug = Str::slug($request->title_tr);
 
-            // Dosya uzantısı
-            $extension = $request->img->extension();
 
             // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_". mt_rand(1000, 9999) . '.' . $extension;
+            $imageName = $nameSlug . "_". mt_rand(1000, 9999);
 
             // Resmi işle
             $image = Image::make($request->img);
             //$image->fit(500, 500);
-            $image->save(public_path("/assets1/images/blog/" . $imageName));
+            $image->encode('webp', 80);
+            $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
 
             // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999) . '.' . $extension;
+            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999);
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName));
+            $imageHome->encode('webp', 80);
+            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.webp'));
 
             // Dosya yolunu kaydet
-            $blog->img = "/assets1/images/blog/" . $imageName;
-            $blog->img_home = "/assets1/images/blog/" . $imageHomeName;
+            $blog->img = "/assets1/images/blog/" . $imageName . '.webp';
+            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.webp';
 
         }else{
             $blog->img="/assets1/images/blog/blog-default.jpg";
             $blog->img_home="/assets1/images/blog/blog-default.jpg";
         }
+
 
 
         $save = $blog->save();
