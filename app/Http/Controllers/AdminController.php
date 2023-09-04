@@ -589,23 +589,20 @@ class AdminController extends Controller
             // Adı Seo uyumlu yap
             $nameSlug = Str::slug($request->input('name_tr')); // Menü adını URL dostu formatına dönüştürür
 
-            // Dosya uzantısı
-            $extension = $request->img->extension();
-
             // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999) . '.' . $extension;
+            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999);
 
             // Resmi işle
             $image = Image::make($request->img);
+            $image->encode('webp', 80);
             $image->fit(500, 500);
-            $image->save(public_path("/assets1/images/menu/" . $imageName));
+            $image->save(public_path("/assets1/images/menu/" . $imageName. '.webp'));
 
             // Dosya yolunu kaydet
-            $menu->img = "/assets1/images/menu/" . $imageName;
+            $menu->img = "/assets1/images/menu/" . $imageName. '.webp';
         }else{
             $menu->img="/assets1/images/menu/menu-default.png";
         }
-
 
 
         $save = $menu->save();
@@ -713,25 +710,20 @@ class AdminController extends Controller
         $menu->priority = $request->priority;
         if ($request->hasFile('img')) {
             // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($request->input('name_tr')); // Menü adını URL dostu formatına dönüştürür
-
-            // Dosya uzantısı
-            $extension = $request->img->extension();
+            $nameSlug = Str::slug($request->name_tr); // Menü adını URL dostu formatına dönüştürür
 
             // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999) . '.' . $extension;
+            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999);
 
             // Resmi işle
             $image = Image::make($request->img);
+            $image->encode('webp', 80);
             $image->fit(500, 500);
-            $image->save(public_path("/assets1/images/menu/" . $imageName));
+            $image->save(public_path("/assets1/images/menu/" . $imageName. '.webp'));
 
             // Dosya yolunu kaydet
-            $menu->img = "/assets1/images/menu/" . $imageName;
-        }else{
-            $menu->img="/assets1/images/menu/menu-default.png";
+            $menu->img = "/assets1/images/menu/" . $imageName. '.webp';
         }
-
         $save = $menu->save();
 
         if ($save) {
