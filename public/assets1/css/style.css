@@ -21026,7 +21026,6 @@ p.desc {
   display: inline-block;
   font-size: 14px;
   font-weight: 700;
-  text-transform: uppercase;
   margin-right: 15px;
   width: auto;
 }
@@ -21207,7 +21206,7 @@ p.desc {
 .rts-menu-area.menu-area-2 .menu-area-2-inner .menu-wrapper .content .desc {
   text-transform: capitalize;
   font-size: 14px;
-  color: #666666;
+  color: #a39b9b;
 }
 .rts-menu-area.menu-area-2 .menu-area-2-inner .menu-wrapper .price-tag {
   background: #fff;
