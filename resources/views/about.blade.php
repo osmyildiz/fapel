@@ -17,7 +17,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 col-md-5">
                         <div class="image-area">
-                            <img src="{{ asset('assets1/images/team/01-big.webp') }}" alt="team-iamge">
+                            <img src="{{ asset('assets1/images/about/about2.webp') }}" alt="team-iamge">
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-7">
