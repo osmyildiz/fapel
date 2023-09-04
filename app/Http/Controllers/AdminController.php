@@ -1133,9 +1133,6 @@ class AdminController extends Controller
             $blog->img = "/assets1/images/blog/" . $imageName . '.webp';
             $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.webp';
 
-        }else{
-            $blog->img="/assets1/images/blog/blog-default.jpg";
-            $blog->img_home="/assets1/images/blog/blog-default.jpg";
         }
 
 

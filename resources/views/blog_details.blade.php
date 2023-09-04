@@ -39,8 +39,8 @@
                                 <!-- single infoe end -->
                             </div>
                             <h3 class="title">{{$blog->{'title_'.$lang} }}</h3>
-                            <p class="disc para-1">
-                                {{$blog->{'content_'.$lang} }}</p>
+                            <p class="disc para-1">{!! html_entity_decode($blog->{'content_'.$lang}) !!}</p>
+
 
                         </div>
                     </div>

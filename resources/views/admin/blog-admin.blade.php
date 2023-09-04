@@ -78,21 +78,33 @@
                         <div class="mb-4 row">
                             <label for="content_tr" class="col-md-3 col-form-label">İçerik (TR)</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="content_tr" name="content_tr" >{{ old('title_tr') }}</textarea>
+                                <textarea class="form-control" id="elm1" name="content_tr">{{ old('content_tr') }}</textarea>
                             </div>
                             @error('content_tr')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="mb-4 row">
-                            <label for="content_en" class="col-md-3 col-form-label">İçerik (EN)</label>
+                            <label for="content_en" class="col-md-3 col-form-label">Content (EN)</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="content_en" name="content_en" >{{ old('title_en') }}</textarea>
+                                <textarea class="form-control" id="elm2" name="content_en">{{ old('content_en') }}</textarea>
                             </div>
                             @error('content_en')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="mb-4 row">
+                            <label for="content_ar" class="col-md-3 col-form-label">المحتوى (AR)</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="elm3" name="content_ar">{{ old('content_ar') }}</textarea>
+                            </div>
+                            @error('content_ar')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="mb-4 row">
                             <label for="content_ar" class="col-md-3 col-form-label">İçerik (AR)</label>
                             <div class="col-sm-9">
@@ -535,7 +547,11 @@
     <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <!--tinymce js-->
+    <script src="{{ URL::asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
 
+    <!-- init js -->
+    <script src="{{ URL::asset('/assets/js/pages/form-editor.init.js') }}"></script>
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
     <script language="javascript" type="text/javascript">

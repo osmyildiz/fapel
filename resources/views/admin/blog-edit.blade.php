@@ -78,27 +78,31 @@
                                 <input class="form-control" type="text" value="{{$res->title_ar}}" id="title_ar" name="title_ar">
                             </div>
                         </div>
-                        <!-- Türkçe içerik -->
-                        <div class="row mb-4">
-                            <label for="content_tr" class="col-sm-3 col-form-label">İçerik (TR)</label>
+                        <div class="mb-4 row">
+                            <label for="content_tr" class="col-md-3 col-form-label">İçerik (TR)</label>
                             <div class="col-sm-9">
-                                <textarea id="content_tr" class="form-control" rows="4" name="content_tr">{{$res->content_tr}}</textarea>
+                                <textarea class="form-control" id="elm1" name="content_tr">{{$res->content_tr}}</textarea>
                             </div>
+
                         </div>
-                        <!-- İngilizce içerik -->
-                        <div class="row mb-4">
-                            <label for="content_en" class="col-sm-3 col-form-label">İçerik (EN)</label>
+
+                        <div class="mb-4 row">
+                            <label for="content_en" class="col-md-3 col-form-label">Content (EN)</label>
                             <div class="col-sm-9">
-                                <textarea id="content_en" class="form-control" rows="4" name="content_en">{{$res->content_en}}</textarea>
+                                <textarea class="form-control" id="elm2" name="content_en">{{$res->content_en}}</textarea>
                             </div>
+
                         </div>
-                        <!-- Arapça içerik -->
-                        <div class="row mb-4">
-                            <label for="content_ar" class="col-sm-3 col-form-label">İçerik (AR)</label>
+
+                        <div class="mb-4 row">
+                            <label for="content_ar" class="col-md-3 col-form-label">المحتوى (AR)</label>
                             <div class="col-sm-9">
-                                <textarea id="content_ar" class="form-control" rows="4" name="content_ar">{{$res->content_ar}}</textarea>
+                                <textarea class="form-control" id="elm3" name="content_ar">{{$res->content_ar}}</textarea>
                             </div>
+
                         </div>
+
+
                         <div class="mb-4 row">
                             <label for="title_ar" class="col-md-3 col-form-label">Arapça URL</label>
                             <div class="col-sm-9">
@@ -210,6 +214,10 @@
     <script src="{{ asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
     <!-- Datatable init js -->
     <script src="{{ asset('/assets/js/pages/datatables.init.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ URL::asset('/assets/js/pages/form-editor.init.js') }}"></script>
     <script language="javascript" type="text/javascript">
         function limitText(limitField, limitNum) {
             if (limitField.value.length > limitNum) {

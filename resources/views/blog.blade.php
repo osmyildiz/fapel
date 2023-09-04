@@ -17,7 +17,7 @@
                     @foreach($blogs as $blog)
                         <div class="blog-single-post-listing details mb--30">
                             <div class="thumbnail">
-                                <img src="{{ asset($blog->img_home) }}" alt="Food Blog">
+                                <img src="{{ asset($blog->img) }}" alt="Food Blog">
                             </div>
                             <div class="blog-listing-content">
                                 <div class="user-info">
@@ -44,8 +44,9 @@
                                     <h3 class="title">{{$blog->{'title_'.$lang} }}</h3>
                                 </a>
                                 <p class="disc para-1 mb--30">
-                                    {{$blog->{'content_'.$lang} }}
-                                </p>
+                                <p class="disc para-1">{!! Str::limit(strip_tags(htmlspecialchars_decode($blog->{'content_'.$lang})), 300) !!}...</p>
+
+
                                 <a class="rts-btn btn-primary mt--0" href="{{ route($lang . '.blog_details', $blog->{'slug_'.$lang} ) }}">{{__('static_text.details')}}</a>
                             </div>
                         </div>
