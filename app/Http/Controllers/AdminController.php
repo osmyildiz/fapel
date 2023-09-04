@@ -378,7 +378,7 @@ class AdminController extends Controller
 
                     $id = mt_rand(1000, 9999);
                     $prefix = Str::slug($category_name->name_en);
-                    $imageName =  "fapel_restaurant_".$prefix."_image_" . time() . '.webp';
+                    $imageName =  "fapel-restaurant-".$prefix."-image-" . time() . '.webp';
                     $image = Image::make($request->img1);
                     //$image =Image::make($request->img1)->resize(1024, 768);
                     $image = $image->encode('webp', 80);
