@@ -121,18 +121,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit-photocategory/{id}', [AdminController::class, 'edit_photocategory'])->name('photocategory.edit');
     Route::post('/update-photocategory/{id}', [AdminController::class, 'update_photocategory'])->name('photocategory.update');
 
-
-    Route::get('/admin-menu/{id}', [AdminController::class, 'admin_menu'])->name('admin-menu');
-    Route::post('/add-menu', [AdminController::class, 'add_menu'])->name('add_menu');
-    Route::post('/update-blog/{id}', [AdminController::class, 'update_blog'])->name('blog.update');
-    Route::get ('/delete-menu/{id}', [AdminController::class, 'delete_menu'])->name('menu.delete');
-    Route::post('/add-foodtype', [AdminController::class, 'add_foodtype'])->name('add_foodtype');
-    Route::get('/edit-foodtype/{id}', [AdminController::class, 'edit_foodtype'])->name('foodtype.edit');
-    Route::delete ('/delete-foodtype/{id}', [AdminController::class, 'delete_foodtype'])->name('foodtype.delete');
-    Route::post('/update-foodtype/{id}', [AdminController::class, 'update_foodtype'])->name('foodtype.update');
-
     Route::get('/admin-blog/{id}', [AdminController::class, 'admin_blog'])->name('admin-blog');
     Route::post('/add-blog', [AdminController::class, 'add_blog'])->name('add_blog');
+    Route::post('/update-blog/{id}', [AdminController::class, 'update_blog'])->name('blog.update');
     Route::get ('/edit-blog/{id}', [AdminController::class, 'edit_blog'])->name('blog.edit');
     Route::get ('/delete-blog/{id}', [AdminController::class, 'delete_blog'])->name('blog.delete');
     Route::post('/add-blog-category', [AdminController::class, 'add_blogcategory'])->name('add_blogcategory');

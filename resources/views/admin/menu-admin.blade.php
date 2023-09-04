@@ -39,9 +39,9 @@
                             <select class="form-control" id="category_id" name="category_id">
                                 <option value="" {{ old('category_id') == "" ? 'selected' : '' }}>Seçiniz...</option>
                                 @foreach($kategori_all as $kategori)
-
+                                    @if($kategori->id != 1)
                                         <option value="{{ $kategori->id }}" {{ old('category_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->name_tr }}</option>
-
+                                    @endif
                                 @endforeach
                             </select>
                             @error('category_id')
