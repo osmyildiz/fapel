@@ -395,6 +395,7 @@ class AdminController extends Controller
 
 
 
+
             $photo->category_id = $request->category;
             $photo->is_active = $is_active;
 
