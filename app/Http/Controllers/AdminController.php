@@ -383,10 +383,12 @@ class AdminController extends Controller
                     $constraint->aspectRatio();
                 });
                 $image = $image->encode('webp', 80);
-                $image->save(storage_path("app/public/images/gallery/" . $imageName));
-                $photo->image_path = "/storage/images/gallery/" . $imageName;
+                $image->save(public_path("assets1/images/gallery/" . $imageName));
+                $photo->image_path = "/assets1/images/gallery/" . $imageName;
 
             }
+
+
 
 
 
