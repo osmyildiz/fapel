@@ -603,7 +603,7 @@ class AdminController extends Controller
             // Dosya yolunu kaydet
             $menu->img = "/assets1/images/menu/" . $imageName. '.webp';
         }else{
-            $menu->img="/assets1/images/menu/menu-default.png";
+            $menu->img="/assets1/images/menu/menu-default.webp";
         }
 
 
