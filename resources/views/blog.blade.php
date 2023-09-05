@@ -90,7 +90,7 @@
                             @foreach($recent_posts as $recent)
                                 <div class="recent-post-single">
                                     <div class="thumbnail">
-                                        <a href="{{ route($lang . '.blog_details', $blog->{'slug_'.$lang} ) }}"><img src="{{ asset('assets1/images/blog/blog-sm-01.jpg') }}" alt="Blog_post"></a>
+                                        <a href="{{ route($lang . '.blog_details', $recent->{'slug_'.$lang} ) }}"><img src="{{ asset($recent->img_home) }}" alt="Blog_post" width="200" height="200"></a>
                                     </div>
                                     <div class="content-area">
                                         <div class="user">
