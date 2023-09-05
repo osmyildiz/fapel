@@ -40,14 +40,14 @@
 
                         @foreach($menu_categories as $category)
                             @if($category->is_active)
-
+                                @if($category->id !=1)
                                     <button class="gf_btn" data-filter=".cat{{$category->id}}"
                                             data-name="{{ $category->$columnName }}"
                                             data-slogan="{{ $category->{"slogan_" . $lang} }}"
                                             data-description="{{ $category->{"description_" . $lang} }}">
                                         {{$category->$columnName}}
                                     </button>
-
+                                @endif
                             @endif
                         @endforeach
 
