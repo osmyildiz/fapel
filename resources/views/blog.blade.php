@@ -44,7 +44,8 @@
                                     <h3 class="title">{{$blog->{'title_'.$lang} }}</h3>
                                 </a>
                                 <p class="disc para-1 mb--30">
-                                <p class="disc para-1">{!! mb_substr(strip_tags(htmlspecialchars_decode($blog->content_ar)), 0,300) !!}...</p>
+                                <p class="disc para-1">{!! mb_substr(strip_tags(htmlspecialchars_decode($blog->{'content_'.$lang})), 0,300) !!}...</p>
+
 
 
                                 <a class="rts-btn btn-primary mt--0" href="{{ route($lang . '.blog_details', $blog->{'slug_'.$lang} ) }}">{{__('static_text.details')}}</a>
