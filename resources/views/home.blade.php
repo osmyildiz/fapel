@@ -421,7 +421,7 @@
                                     </div>
                                     <span class="blog-badge"> {{ $blog->updated_at->format('F j, Y') }}</span>
                                     <div class="content">
-                                        <p class="tag">{{ $blog->{"category_name_" . $lang} }}</p>
+                                        <!--<p class="tag">{{ $blog->{"category_name_" . $lang} }}</p>-->
                                         <h3 class="title"><a href="{{ route($lang . '.blog_details', $blog->{'slug_'.$lang} ) }}">{{ $blog->{"title_" . $lang} }}</a></h3>
                                     </div>
                                 </div>
