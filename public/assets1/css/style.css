@@ -20621,28 +20621,28 @@ p.desc {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 110px;
     line-height: 130px;
-    margin: 75px 0 -45px 0;
+    margin: 75px 0 -32px 0;
   }
 }
 @media (max-width: 768px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 78px;
     line-height: 98px;
-    margin: 75px 0 -40px 0;
+    margin: 75px 0 -128px 0;
   }
 }
 @media (max-width: 576px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 60px;
     line-height: 80px;
-    margin: 75px 0 -40px 0;
+    margin: 75px 0 -125px 0;
   }
 }
 @media (max-width: 450px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 48px;
     line-height: 58px;
-    margin: 75px 0 -40px 0;
+    margin: 75px 0 -115px 0;
   }
 }
 
