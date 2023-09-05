@@ -20608,41 +20608,41 @@ p.desc {
   font-size: 160px;
   line-height: 200px;
   font-weight: 400;
-  margin: 100px 0px -60px 0px;
+  margin: 100px 0 0 0;
 }
 @media (max-width: 1200px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 150px;
     line-height: 175px;
-    margin: 100px 0px -50px 0px;
+    margin: 100px 0 0 0;
   }
 }
 @media (max-width: 991px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 110px;
     line-height: 130px;
-    margin: 75px 0 -32px 0;
+    margin: 75px 0 0 0;
   }
 }
 @media (max-width: 768px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 78px;
     line-height: 98px;
-    margin: 75px 0 -128px 0;
+    margin: 75px 0 0 0;
   }
 }
 @media (max-width: 576px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 60px;
     line-height: 80px;
-    margin: 75px 0 -125px 0;
+    margin: 75px 0 0 0;
   }
 }
 @media (max-width: 450px) {
   .rts-breadcrumb-area .breadcrumb-inner .main-title {
     font-size: 48px;
     line-height: 58px;
-    margin: 75px 0 -115px 0;
+    margin: 75px 0 0 0;
   }
 }
 
@@ -20651,7 +20651,7 @@ p.desc {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 200px 0 150px 0;
+  padding: 200px 0 0 0;
   overflow: hidden;
 }
 
