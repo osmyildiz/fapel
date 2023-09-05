@@ -1,4 +1,4 @@
-<div class="rts-breadcrumb-area bg-breadcrumb bg-dark " style="background-image: url({{ asset($slider->img) }})">
+<div class="rts-breadcrumb-area ptb_sm--100 bg-breadcrumb bg-dark " style="background-image: url({{ asset($slider->img) }})">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
