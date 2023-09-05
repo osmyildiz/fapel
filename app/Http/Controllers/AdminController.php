@@ -224,7 +224,7 @@ class AdminController extends Controller
             $imageName = "fapel-home-page-slider-".$id."-".time();
             $image = Image::make($request->img);
             $image->encode('webp', 80);
-            $image->fit(1400, 630);
+            //$image->fit(1400, 630);
             $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
             $slider->img = "/assets1/images/slider/".$imageName .'.webp';
         }
@@ -266,7 +266,7 @@ class AdminController extends Controller
             $imageName = "fapel-".$slider->page_name."-page-slider-".$id."-".time();
             $image = Image::make($request->img);
             $image->encode('webp', 80);
-            $image->fit(1400, 630);
+            //$image->fit(1400, 630);
             $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
             $slider->img = "/assets1/images/slider/".$imageName .'.webp';
         }
