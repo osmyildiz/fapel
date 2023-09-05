@@ -237,7 +237,7 @@
                         <p class="desc" data-sal="slide-up" data-sal-duration="800">{{ $about->$shortContentField }}</p>
 
                         <div class="button-area-banner" data-sal="slide-up" data-sal-delay="350" data-sal-duration="800">
-                            <a href="/about" class="rts-btn btn-secondary">{{ __('static_text.details') }}</a>
+                            <a href="{{ route(app()->getLocale() . '.about') }}" class="rts-btn btn-secondary">{{ __('static_text.details') }}</a>
                         </div>
                     </div>
                 </div>
