@@ -20676,7 +20676,7 @@ p.desc {
 }
 
 .home-one.menu-tab .rts-breadcrumb-area {
-
+  background: url(../images/breadcrumbs/menu-1.webp);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -20685,7 +20685,7 @@ p.desc {
 }
 
 .home-one.shop .rts-breadcrumb-area {
-
+  background: url(../images/breadcrumbs/shop.webp);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -21607,7 +21607,7 @@ p.desc {
 }
 
 .rts-video-area {
-
+  background: url(../images/bg/video-bg.webp);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22118,7 +22118,7 @@ p.desc {
 }
 
 .rts-menu-area-5 {
-
+  background: url(../images/bg/seafood-bg.webp);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22249,7 +22249,7 @@ p.desc {
 }
 
 .rts-menu-area7 {
-
+  background: url(../images/bg/bg-pizza.webp);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -22765,7 +22765,7 @@ p.desc {
 }
 
 .home-one.menu-tab {
-
+  background: url(../images/bg/menu-section.webp);
   background-attachment: fixed;
 }
 .home-one.menu-tab .rts-menu-area {
@@ -22872,7 +22872,7 @@ p.desc {
 }
 
 .rts-blog-area {
-
+  background: url(../images/blog/bg-01.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -23857,7 +23857,7 @@ p.desc {
 
 .rts-cta-area {
   width: 100%;
-
+  background: url(../images/cta/cta-bg.webp);
   background-color: #111111;
   padding: 37px 40px 35px 60px;
 }
@@ -25826,7 +25826,7 @@ p.desc {
 }
 
 .rts-deal-section {
-
+  background: url(../images/bg/banner3.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27034,7 +27034,7 @@ p.desc {
 }
 
 .rts-contact-area-two {
-
+  background: url(../images/contact/bg-02.webp);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -27195,7 +27195,7 @@ p.desc {
 }
 
 .rts-counter-up-area.home-four {
-
+  background-image: url(../images/bg/counter-bg.png);
   background-color: #111;
   background-position: center;
   background-repeat: no-repeat;
