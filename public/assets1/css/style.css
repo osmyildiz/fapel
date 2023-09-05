@@ -20547,7 +20547,9 @@ p.desc {
   background: url(../images/breadcrumbs/about.webp);
   background-position: top center;
   background-repeat: no-repeat;
+    background-size: cover;
   overflow: hidden;
+
 }
 .rts-breadcrumb-area .breadcrumb-inner .banner-shape-area {
   display: flex;
