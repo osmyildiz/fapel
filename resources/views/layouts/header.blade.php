@@ -190,22 +190,22 @@
             <div class="social-wrapper-one">
                 <ul>
                     <li>
-                        <a href={{$contact->facebook}}" >
+                        <a href="{{$contact->facebook}}" >
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     </li>
                     <li>
-                        <a href={{$contact->twitter}}"  >
+                        <a href="{{$contact->twitter}}"  >
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </li>
                     <li>
-                        <a href={{$contact->instagram}}">
+                        <a href="{{$contact->instagram}}">
                             <i class="fa-brands fa-youtube"></i>
                         </a>
                     </li>
                     <li>
-                        <a href={{$contact->linkedin}}" >
+                        <a href="{{$contact->linkedin}}" >
                             <i class="fa-brands fa-linkedin-in"></i>
                         </a>
                     </li>
