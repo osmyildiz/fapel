@@ -202,7 +202,7 @@
                 <div class="col-lg-7 col-md-12 pr--60 pr_sm--0 mt_md--50 mt_sm--50 pl_md--0 pl_sm--0 pb_md--150 pb_sm--70">
                     <div class="about-one-img">
                         <div class="thumbnail-1">
-                            <img src="{{asset('assets1/images/about/about1.webp')}}" alt="about">
+                            <img src="{{asset('assets1/images/about/about1-1.webp')}}" alt="about">
                             <div class="line">
                                 <img src="{{asset('assets1/images/about/line-shape-1.webp')}}" alt="about">
                             </div>
