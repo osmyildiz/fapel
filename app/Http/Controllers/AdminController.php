@@ -219,15 +219,20 @@ class AdminController extends Controller
         $slider->is_active = $request->has('is_active') ? 1 : 0;
         $slider->priority = $request->priority;
 
+
         if($request->hasFile('img')) {
-            $id = mt_rand(1000, 9999);
-            $imageName = "fapel-home-page-slider-".$id."-".time();
+            $id = mt_rand(10000, 99999);
+            $originalImageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $originalImageName=str_replace(' ', '-', $originalImageName);
+            $originalImageName=$originalImageName."-".$id;
+
             $image = Image::make($request->img);
             $image->encode('webp', 80);
-            //$image->fit(1400, 630);
-            $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
-            $slider->img = "/assets1/images/slider/".$imageName .'.webp';
+            $image->save(public_path("/assets1/images/slider/" . $originalImageName . '.webp'));
+            $slider->img = "/assets1/images/slider/" . $originalImageName . '.webp';
         }
+
 
         if($slider->save()){
             return back()->with('success', 'Yeni slider başarıyla eklendi.');
@@ -262,8 +267,11 @@ class AdminController extends Controller
         $slider->priority = $request->priority;
 
         if($request->hasFile('img')) {
-            $id = mt_rand(1000, 9999);
-            $imageName = "fapel-".$slider->page_name."-page-slider-".$id."-".time();
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $imageName=str_replace(' ', '-', $imageName);
+            $imageName=$imageName."-".$id;
             $image = Image::make($request->img);
             $image->encode('webp', 80);
             //$image->fit(1400, 630);
@@ -338,10 +346,12 @@ class AdminController extends Controller
 
 
             foreach($files as $key=>$file){
-                $id = mt_rand(100, 9999);
 
-                $prefix = Str::slug($category->name_en);
-                $imageName =  "fapel-restaurant-".$prefix."-image-".$id."-" . time() . '.webp';
+                $id = mt_rand(10000, 99999);
+                $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $imageName=str_replace(' ', '-', $imageName);
+                $imageName=$imageName."-".$id;
                 $image = Image::make($file)->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -387,9 +397,11 @@ class AdminController extends Controller
 
             if ($request->hasFile('img1')) {
 
-                $id = mt_rand(1000, 9999);
-                $prefix = Str::slug($category_name->name_en);
-                $imageName =  "fapel-restaurant-".$prefix."-image-" . time() . '.webp';
+                $id = mt_rand(10000, 99999);
+                $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $imageName=str_replace(' ', '-', $imageName);
+                $imageName=$imageName."-".$id;
                 $image = Image::make($request->img1)->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -588,12 +600,11 @@ class AdminController extends Controller
 
         // Resim dosyasını işleyelim
         if ($request->hasFile('img')) {
-            // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($request->input('name_tr')); // Menü adını URL dostu formatına dönüştürür
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
 
-            // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999);
-
+            $imageName=str_replace(' ', '-', $imageName);
+            $imageName=$imageName."-".$id;
             // Resmi işle
             $image = Image::make($request->img);
             $image->encode('webp', 80);
@@ -712,10 +723,11 @@ class AdminController extends Controller
         $menu->priority = $request->priority;
         if ($request->hasFile('img')) {
             // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($request->name_tr); // Menü adını URL dostu formatına dönüştürür
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
 
-            // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_"  . mt_rand(1000, 9999);
+            $imageName=str_replace(' ', '-', $imageName);
+            $imageName=$imageName."-".$id;
 
             // Resmi işle
             $image = Image::make($request->img);
