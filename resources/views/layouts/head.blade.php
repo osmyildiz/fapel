@@ -1,7 +1,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets1/images/favicon.png')}}">
 
 <!-- fontawesome css -->
-<link rel="stylesheet" href="{{asset('assets1/css/plugins/fontawesome-5.css')}}">
+<!--<link rel="stylesheet" href="{{asset('assets1/css/plugins/fontawesome-5.css')}}">-->
 <!-- fontawesome css -->
 <link rel="stylesheet" href="{{asset('assets1/css/plugins/swiper.css')}}">
 <link rel="stylesheet" href="{{asset('assets1/css/plugins/unicons.css')}}">
