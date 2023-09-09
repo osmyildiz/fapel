@@ -3,11 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
-    <title> @yield('title') | TCR Bar Admin Panel </title>
+    <title> @yield('title')FAPEL Restaurant Admin Panel</title>
+    <link rel="icon" type="image/x-icon" href="assets1/images/favicon.png"/>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Fapel Restaurant, Anadolu mutfağının en seçkin lezzetlerini sunmaktadır. Urfalıların eşsiz misafirperverliğiyle birleştirilmiş benzersiz bir deneyim için bizi ziyaret edin. " name="description" />
+    <meta content="ana sayfa, restoran, fapel, Anadolu mutfağı, Urfalı lezzetler" name="keywords" />
+    <meta content="Fapel Restaurant Team" name="author" />
     <!-- App favicon -->
+    !-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('/img/ico.png') }}">
     @include('admin.layouts.head-css')
 </head>

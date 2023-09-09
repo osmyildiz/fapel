@@ -957,11 +957,11 @@ class AdminController extends Controller
 
         // Resim dosyasını işleyelim
         if ($request->hasFile('img')) {
-            // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($validatedData['title_tr']);
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
 
-            // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_". mt_rand(1000, 9999);
+            $imageName=str_replace(' ', '-', $imageName);
+            $imageName=$imageName."-".$id;
 
             // Resmi işle
             $image = Image::make($request->img);
@@ -970,7 +970,7 @@ class AdminController extends Controller
             $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
 
             // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999);
+            $imageHomeName = $imageName . "_home" ;
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
@@ -1112,12 +1112,11 @@ class AdminController extends Controller
         $blog->priority = $request->priority;
 
         if ($request->hasFile('img')) {
-            // Adı Seo uyumlu yap
-            $nameSlug = Str::slug($request->title_tr);
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
 
-
-            // Benzersiz bir dosya adı oluştur
-            $imageName = $nameSlug . "_". mt_rand(1000, 9999);
+            $imageName=str_replace(' ', '-', $imageName);
+            $imageName=$imageName."-".$id;
 
             // Resmi işle
             $image = Image::make($request->img);
@@ -1126,7 +1125,7 @@ class AdminController extends Controller
             $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
 
             // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $nameSlug . "_home_" . mt_rand(1000, 9999);
+            $imageHomeName = $imageName . "_home";
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
