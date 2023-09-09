@@ -983,8 +983,8 @@ class AdminController extends Controller
 
             $extension = $imageFile->getClientOriginalExtension();
 
-            $image = Image::make($imageFile);
-            $image->save(public_path("/assets1/images/blog/" . $imageName . '.' . $extension));
+            $request->img->move(public_path("/assets1/images/blog/"), $imageName . '.' . $extension);
+
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
@@ -1136,8 +1136,8 @@ class AdminController extends Controller
 
             $extension = $imageFile->getClientOriginalExtension();
 
-            $image = Image::make($imageFile);
-            $image->save(public_path("/assets1/images/blog/" . $imageName . '.' . $extension));
+            $request->img->move(public_path("/assets1/images/blog/"), $imageName . '.' . $extension);
+
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
