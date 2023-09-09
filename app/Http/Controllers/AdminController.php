@@ -48,6 +48,7 @@ class AdminController extends Controller
         return view('admin.index');
 
     }
+
     public function contact()
     {
         $record = Contact::find(1);
@@ -220,17 +221,20 @@ class AdminController extends Controller
         $slider->priority = $request->priority;
 
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
+            $imageFile = $request->img;
             $id = mt_rand(10000, 99999);
-            $originalImageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $originalImageName=str_replace(' ', '-', $originalImageName);
-            $originalImageName=$originalImageName."-".$id;
+            $extension = $imageFile->getClientOriginalExtension();
 
-            $image = Image::make($request->img);
-            $image->encode('webp', 80);
-            $image->save(public_path("/assets1/images/slider/" . $originalImageName . '.webp'));
-            $slider->img = "/assets1/images/slider/" . $originalImageName . '.webp';
+            $image = Image::make($imageFile);
+
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
+            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
         }
 
 
@@ -266,17 +270,20 @@ class AdminController extends Controller
         $slider->is_active = $is_active;
         $slider->priority = $request->priority;
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
+            $imageFile = $request->img;
             $id = mt_rand(10000, 99999);
-            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $imageName=str_replace(' ', '-', $imageName);
-            $imageName=$imageName."-".$id;
-            $image = Image::make($request->img);
-            $image->encode('webp', 80);
-            //$image->fit(1400, 630);
-            $image->save(public_path("/assets1/images/slider/" . $imageName. '.webp'));
-            $slider->img = "/assets1/images/slider/".$imageName .'.webp';
+            $extension = $imageFile->getClientOriginalExtension();
+
+            $image = Image::make($imageFile);
+
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
+            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
         }
 
         $save = $slider->save();
@@ -332,48 +339,33 @@ class AdminController extends Controller
 
         if($request->category ==0){
 
-
             return back()->with('danger', 'Kategori Seçiniz');
 
         }
         $priority=Gallery::selectRaw('max(priority) as pri')->get();
         $pri = $priority[0]->pri;
 
-        $category = GalleryCategory::find($request->category);
-
-
         if($files = $request->file('image')){
 
-
-            foreach($files as $key=>$file){
-
+            foreach ($files as $key => $file) {
                 $id = mt_rand(10000, 99999);
-                $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageName = str_replace(' ', '-', $imageName);
+                $imageName = $imageName . "-" . $id;
+                $extension = $file->getClientOriginalExtension();
+                $file->move(public_path("assets1/images/gallery/"), $imageName . '.' . $extension);
+                $url = "/assets1/images/gallery/" . $imageName . '.' . $extension;
 
-                $imageName=str_replace(' ', '-', $imageName);
-                $imageName=$imageName."-".$id;
-                $image = Image::make($file)->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $image = $image->encode('webp', 80);
-                $image->save(public_path("assets1/images/gallery/" . $imageName));
-                $url = "/assets1/images/gallery/" . $imageName;
-
-
-                $save=Gallery::insert([
+                $save = Gallery::insert([
                     'image_path' => $url,
                     'category_id' => $request->category,
                     'is_active' => 1,
-                    'priority' => $key+1+$pri,
-                    'created_at'=>date('Y-m-d'),
-                    'updated_at'=>date('Y-m-d')
+                    'priority' => $key + 1 + $pri,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
-
             }
-
-
         }
-
 
         if($save){
             return back()->with('success', 'Tüm Görsel(ler) Eklendi');
@@ -393,22 +385,18 @@ class AdminController extends Controller
             }
 
             $photo = Gallery::find($id);
-            $category_name = GalleryCategory::find($request->category);
 
             if ($request->hasFile('img1')) {
-
+                $imageFile = $request->img1;
                 $id = mt_rand(10000, 99999);
-                $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageName = str_replace(' ', '-', $imageName);
+                $imageName = $imageName . "-" . $id;
 
-                $imageName=str_replace(' ', '-', $imageName);
-                $imageName=$imageName."-".$id;
-                $image = Image::make($request->img1)->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $image = $image->encode('webp', 80);
-                $image->save(public_path("assets1/images/gallery/" . $imageName));
-                $photo->image_path = "/assets1/images/gallery/" . $imageName;
+                $extension = $imageFile->getClientOriginalExtension();
 
+                $imageFile->move(public_path("assets1/images/gallery/"), $imageName . '.' . $extension);
+                $photo->image_path = "/assets1/images/gallery/" . $imageName . '.' . $extension;
             }
             //test
             $photo->category_id = $request->category;
@@ -423,7 +411,6 @@ class AdminController extends Controller
             return back()->with('danger', 'An unexpected error occured. Please try again.!!');
         } catch (\Exception $e) {
             // log the error
-            Log::error($e);
             return back()->with('danger', 'An error occurred: ' . $e->getMessage());
         }
     }
@@ -598,21 +585,22 @@ class AdminController extends Controller
         $menu->price = $validatedData['price']; // Price bilgisini kaydedelim
         $menu->category_id = $validatedData['category_id']; // Kategori bilgisini kaydedelim
 
-        // Resim dosyasını işleyelim
+
+
         if ($request->hasFile('img')) {
+            $imageFile = $request->img;
             $id = mt_rand(10000, 99999);
-            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $imageName=str_replace(' ', '-', $imageName);
-            $imageName=$imageName."-".$id;
-            // Resmi işle
-            $image = Image::make($request->img);
-            $image->encode('webp', 80);
-            $image->fit(500, 500);
-            $image->save(public_path("/assets1/images/menu/" . $imageName. '.webp'));
+            $extension = $imageFile->getClientOriginalExtension();
 
-            // Dosya yolunu kaydet
-            $menu->img = "/assets1/images/menu/" . $imageName. '.webp';
+            $image = Image::make($imageFile);
+
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/menu/" . $imageName . '.' . $extension));
+            $menu->img = "/assets1/images/menu/" . $imageName . '.' . $extension;
         }else{
             $menu->img="/assets1/images/menu/menu-default.webp";
         }
@@ -722,21 +710,19 @@ class AdminController extends Controller
         $menu->is_active = $is_active;
         $menu->priority = $request->priority;
         if ($request->hasFile('img')) {
-            // Adı Seo uyumlu yap
+            $imageFile = $request->img;
             $id = mt_rand(10000, 99999);
-            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $imageName=str_replace(' ', '-', $imageName);
-            $imageName=$imageName."-".$id;
+            $extension = $imageFile->getClientOriginalExtension();
 
-            // Resmi işle
-            $image = Image::make($request->img);
-            $image->encode('webp', 80);
-            $image->fit(500, 500);
-            $image->save(public_path("/assets1/images/menu/" . $imageName. '.webp'));
+            $image = Image::make($imageFile);
 
-            // Dosya yolunu kaydet
-            $menu->img = "/assets1/images/menu/" . $imageName. '.webp';
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/menu/" . $imageName . '.' . $extension));
+            $menu->img = "/assets1/images/menu/" . $imageName . '.' . $extension;
         }
         $save = $menu->save();
 
@@ -959,15 +945,12 @@ class AdminController extends Controller
         if ($request->hasFile('img')) {
             $id = mt_rand(10000, 99999);
             $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $imageName=str_replace(' ', '-', $imageName);
-            $imageName=$imageName."-".$id;
+            $extension = $request->img->getClientOriginalExtension();
 
-            // Resmi işle
-            $image = Image::make($request->img);
-            //$image->fit(500, 500);
-            $image->encode('webp', 80);
-            $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
+            $request->img->move(public_path("/assets1/images/blog/"), $imageName . '.' . $extension);
 
             // img_home için 420x420 boyutunda resim oluştur
             $imageHomeName = $imageName . "_home" ;
@@ -976,14 +959,16 @@ class AdminController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $imageHome->encode('webp', 80);
-            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.webp'));
+
+            $extension = $request->img->getClientOriginalExtension();
+
+            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.' . $extension));
 
             // Dosya yolunu kaydet
-            $blog->img = "/assets1/images/blog/" . $imageName . '.webp';
-            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.webp';
-
-        }else{
+            $blog->img = "/assets1/images/blog/" . $imageName . '.' . $extension;
+            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.' . $extension;
+        }
+        else{
             $blog->img="/assets1/images/blog/blog-default.jpg";
             $blog->img_home="/assets1/images/blog/blog-default.jpg";
         }
@@ -1114,31 +1099,30 @@ class AdminController extends Controller
         if ($request->hasFile('img')) {
             $id = mt_rand(10000, 99999);
             $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
 
-            $imageName=str_replace(' ', '-', $imageName);
-            $imageName=$imageName."-".$id;
+            $extension = $request->img->getClientOriginalExtension();
 
-            // Resmi işle
-            $image = Image::make($request->img);
-            //$image->fit(500, 500);
-            $image->encode('webp', 80);
-            $image->save(public_path("/assets1/images/blog/" . $imageName . '.webp'));
+            $request->img->move(public_path("/assets1/images/blog/"), $imageName . '.' . $extension);
 
             // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $imageName . "_home";
+            $imageHomeName = $imageName . "_home" ;
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-            $imageHome->encode('webp', 80);
-            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.webp'));
+
+            $extension = $request->img->getClientOriginalExtension();
+
+            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.' . $extension));
 
             // Dosya yolunu kaydet
-            $blog->img = "/assets1/images/blog/" . $imageName . '.webp';
-            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.webp';
-
+            $blog->img = "/assets1/images/blog/" . $imageName . '.' . $extension;
+            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.' . $extension;
         }
+
 
 
 
@@ -1205,5 +1189,6 @@ class AdminController extends Controller
 
         return back()->with('danger', 'An unexpected error occured. Please try again.!!');
     }
+
 
 }
