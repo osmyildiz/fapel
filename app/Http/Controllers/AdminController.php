@@ -973,6 +973,36 @@ class AdminController extends Controller
             $blog->img_home="/assets1/images/blog/blog-default.jpg";
         }
 
+        if ($request->hasFile('img')) {
+            $imageFile = $request->img;
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
+            $imageHomeName = $imageName . "-home-" . $id;
+
+            $extension = $imageFile->getClientOriginalExtension();
+
+            $image = Image::make($imageFile);
+            $image->save(public_path("/assets1/images/blog/" . $imageName . '.' . $extension));
+            $imageHome = Image::make($request->img);
+            $imageHome->fit(420, 420, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.' . $extension));
+
+            // Dosya yolunu kaydet
+            $blog->img = "/assets1/images/blog/" . $imageName . '.' . $extension;
+            $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.' . $extension;
+
+
+        }else{
+            $blog->img="/assets1/images/blog/blog-default.jpg";
+            $blog->img_home="/assets1/images/blog/blog-default.jpg";
+        }
+
 
 
         $blog->priority = $validatedData['priority'] ?? 0; // Varsa değeri al, yoksa 0
@@ -1097,30 +1127,30 @@ class AdminController extends Controller
         $blog->priority = $request->priority;
 
         if ($request->hasFile('img')) {
+            $imageFile = $request->img;
             $id = mt_rand(10000, 99999);
-            $imageName = pathinfo($request->img->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
             $imageName = str_replace(' ', '-', $imageName);
             $imageName = $imageName . "-" . $id;
+            $imageHomeName = $imageName . "-home-" . $id;
 
-            $extension = $request->img->getClientOriginalExtension();
+            $extension = $imageFile->getClientOriginalExtension();
 
-            $request->img->move(public_path("/assets1/images/blog/"), $imageName . '.' . $extension);
-
-            // img_home için 420x420 boyutunda resim oluştur
-            $imageHomeName = $imageName . "_home" ;
+            $image = Image::make($imageFile);
+            $image->save(public_path("/assets1/images/blog/" . $imageName . '.' . $extension));
             $imageHome = Image::make($request->img);
             $imageHome->fit(420, 420, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
 
-            $extension = $request->img->getClientOriginalExtension();
-
             $imageHome->save(public_path("/assets1/images/blog/" . $imageHomeName . '.' . $extension));
 
             // Dosya yolunu kaydet
             $blog->img = "/assets1/images/blog/" . $imageName . '.' . $extension;
             $blog->img_home = "/assets1/images/blog/" . $imageHomeName . '.' . $extension;
+
+
         }
 
 
