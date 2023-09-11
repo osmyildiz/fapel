@@ -49,11 +49,18 @@
                         </div>
                         <div class="wized-body">
 
-                            @foreach($branches as $branch)
+
                                 <ul class="single-categories">
-                                    <li><a href="{{ route($lang . '.branch_details', $branch->{'slug_'.$lang} ) }}">{{$branch->name}}<i class="far fa-long-arrow-right"></i></a></li>
+                                    <li><a href="{{ route($lang . '.menu') }}">{{__('static_text.menu')}}<i class="far fa-long-arrow-right"></i></a></li>
                                 </ul>
-                            @endforeach
+                            <ul class="single-categories">
+                                <li><a href="{{ route($lang . '.contact') }}">{{__('static_text.contact')}}<i class="far fa-long-arrow-right"></i></a></li>
+                            </ul>
+                            <ul class="single-categories">
+                                <li><a href="{{ route($lang . '.reservation') }}">{{__('static_text.book_a_table')}}<i class="far fa-long-arrow-right"></i></a></li>
+                            </ul>
+
+
 
                         </div>
                     </div>
