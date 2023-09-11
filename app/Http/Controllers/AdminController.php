@@ -1220,11 +1220,9 @@ class AdminController extends Controller
 
         return back()->with('danger', 'An unexpected error occured. Please try again.!!');
     }
-
     public function branch()
     {
         $branches = Branch::orderBy('priority','ASC')->get();
-
         return view('admin.branches',compact('branches'));
 
     }
