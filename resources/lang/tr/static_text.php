@@ -5,7 +5,7 @@ return [
         'home' => 'anasayfa',
         'about' => 'hakkimizda',
         'menu' => 'menu',
-        'gallery' => 'foto-galeri',
+        'gallery' => 'galeri',
         'blog' => 'blog',
         'reservation' => 'rezervasyon',
         'contact' => 'iletisim',
@@ -23,7 +23,7 @@ return [
 
     'home' => 'ANA SAYFA',
     'about' => 'HAKKIMIZDA',
-    'gallery' => 'FOTO GALERİ',
+    'gallery' => 'GALERİ',
     'contact' => 'İLETİŞİM',
     'menu' => 'MENU',
     'blog' => 'BLOG',
