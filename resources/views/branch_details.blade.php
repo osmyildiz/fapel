@@ -79,8 +79,8 @@
                                 <div class="content-area">
                                     <div class="user">
                                         <i class="fal fa-phone"></i>
-                                        <a href="tel:{{$branch->phone}}" style="color: inherit; text-decoration: none;">
-                                            <span>{{$branch->phone}}</span>
+                                        <a href="tel:{{$record->phone}}" style="color: inherit; text-decoration: none;">
+                                            <span>{{$record->phone}}</span>
                                         </a>
                                     </div>
 
