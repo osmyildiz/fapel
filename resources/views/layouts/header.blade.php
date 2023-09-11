@@ -66,46 +66,42 @@
                         <div class="bottom">
                             @php
                                 $currentLang = app()->getLocale();
-    $currentRouteName = Illuminate\Support\Facades\Route::currentRouteName() ?? 'home';
+                                $currentRouteName = Illuminate\Support\Facades\Route::currentRouteName() ?? 'home';
+                                $routeSuffix = str_replace($currentLang . '.', '', $currentRouteName);
 
-    $routeSuffix = str_replace($currentLang . '.', '', $currentRouteName);
+                                $translatedRouteNames = [
+                                    'tr' => 'tr.' . $routeSuffix,
+                                    'en' => 'en.' . $routeSuffix,
+                                    'ar' => 'ar.' . $routeSuffix
+                                ];
 
-    $translatedRouteNames = [
-        'tr' => 'tr.' . $routeSuffix,
-        'en' => 'en.' . $routeSuffix,
-        'ar' => 'ar.' . $routeSuffix
-    ];
+                                $translatedSlugs = [
+                                    'tr' => null,
+                                    'en' => null,
+                                    'ar' => null,
+                                ];
 
-    // Varsayılan olarak boş slug değerlerini tanımlıyoruz.
-    $translatedSlugs = [
-        'tr' => null,
-        'en' => null,
-        'ar' => null,
-    ];
+                                $isBranch = strpos($currentRouteName, 'branch_details') !== false;
 
-    // Eğer rota slug parametresine sahipse, bu değeri kullanarak blog gönderisini çekiyoruz.
-    if (request()->route()->hasParameter('slug')) {
-        $currentSlug = request()->route('slug');
-        $currentPost = \App\Models\BlogPost::where('slug_' . $currentLang, $currentSlug)->first();
-        \Illuminate\Support\Facades\Log::info('Mevcut Slug:', ['slug' => $currentSlug]);
+                                if (request()->route()->hasParameter('slug')) {
+                                    $currentSlug = request()->route('slug');
+                                    $currentModel = null;
 
-        if ($currentPost) {
-            // Blog gönderisinin mevcut olduğunu loglayalım
-            \Illuminate\Support\Facades\Log::info('Mevcut Blog Gönderisi:', ['post_id' => $currentPost->id, 'title' => $currentPost->title]);
+                                    if ($isBranch) {
+                                        $currentModel = \App\Models\Branch::where('slug_' . $currentLang, $currentSlug)->first();
+                                    } else {
+                                        $currentModel = \App\Models\BlogPost::where('slug_' . $currentLang, $currentSlug)->first();
+                                    }
 
-            // Slug'ları doğru bir şekilde set ediyoruz.
-            $translatedSlugs = [
-                'tr' => $currentPost->slug_tr,
-                'en' => $currentPost->slug_en,
-                'ar' => $currentPost->slug_ar,
-            ];
-        } else {
-            // Blog gönderisinin bulunamadığını loglayalım
-            \Illuminate\Support\Facades\Log::warning('Blog gönderisi bulunamadı', ['slug' => $currentSlug]);
-        }
-    }
+                                    if ($currentModel) {
+                                        $translatedSlugs = [
+                                            'tr' => $currentModel->slug_tr,
+                                            'en' => $currentModel->slug_en,
+                                            'ar' => $currentModel->slug_ar,
+                                        ];
+                                    }
+                                }
                             @endphp
-
 
                             <div class="query-list">
                                 <a href="{{ route($translatedRouteNames['tr'], ['slug' => $translatedSlugs['tr']]) }}"

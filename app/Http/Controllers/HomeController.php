@@ -219,6 +219,32 @@ class HomeController extends Controller
 
 
     }
+    public function branch_details($slug)
+    {
+        $slider = Slider::where('is_active',1)
+            ->where('page_name','branches')
+            ->first();
+
+        $currentLang = app()->getLocale(); // Bu şekilde doğru dil bilgisini elde edersiniz.
+        $slug_lang = 'slug_' . $currentLang;
+
+        $record = Branch::
+        where('is_active',1)
+        ->where("slug_tr",$slug)
+            ->orderBy('priority','ASC')->first();
+        $seo = Seo::where('page_name','branches')
+            ->first();
+        $branches = Branch::where('is_active',1)
+            ->orderBy('priority','ASC')->get();
+        $contact = Contact::find(1);
+
+
+        $this->setSEO($seo);
+
+        return view('branch_details',compact('record','slider','contact','branches'));
+
+
+    }
     public function booking()
     {
         $slider = Slider::where('is_active',1)

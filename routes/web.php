@@ -64,7 +64,7 @@ Route::prefix('ar')->group(function() {
     Route::get('hajz', [HomeController::class, 'booking'])->name('ar.reservation');
     Route::get('ittisal', [HomeController::class, 'contact'])->name('ar.contact');
     Route::get('furoo', [HomeController::class, 'branches'])->name('ar.branches');
-    Route::get('tafaasil-furoo/{slug}', [HomeController::class, 'branch_details'])->name('ar.branch-details');
+    Route::get('tafaasil-furoo/{slug}', [HomeController::class, 'branch_details'])->name('ar.branch_details');
     Route::get('tafaasil-mudawwanat/{slug}', [HomeController::class, 'blogDetails'])->name('ar.blog_details');
     Route::post('book_a_table', [HomeController::class, 'book_a_table_form'])->name('ar.book_a_table');
 

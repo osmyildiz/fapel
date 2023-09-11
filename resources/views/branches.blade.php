@@ -30,13 +30,15 @@
                             <div class="swiper-slide">
                                 <div class="blog-wrapper">
                                     <div class="image-part">
-                                        <!-- Resim yolu şu an eksik, eğer bir 'image_path' veya benzeri bir alanınız varsa burada kullanabilirsiniz -->
-                                        <img src="{{ asset($record->img) ?? asset('assets1/images/blog/blog-01.jpg') }}" alt="blog">
+                                        <a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}">
+                                            <img src="{{ asset($record->img) ?? asset('assets1/images/blog/blog-01.jpg') }}" alt="blog">
+                                        </a>
+
                                     </div>
 
                                     <div class="content">
 
-                                        <h3 class="title"><a href="{{ route($lang . '.branch_details', $record->slug ) }}">{{ $record->name }}</a></h3>
+                                        <h3 class="title"><a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}">{{ $record->name }}</a></h3>
                                     </div>
                                 </div>
                             </div>
