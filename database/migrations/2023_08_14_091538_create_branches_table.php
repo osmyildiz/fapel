@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone');
-            $table->string('image_url')->nullable();
+            $table->string('img')->nullable();
+            $table->string('content_tr')->nullable();
+            $table->string('content_en')->nullable();
+            $table->string('content_ar')->nullable();
             $table->string('weekday_opening_time')->nullable(); // Hafta içi açılış saati
             $table->string('weekend_opening_time')->nullable();
             $table->tinyInteger('is_active')->default(1);

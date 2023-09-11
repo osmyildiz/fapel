@@ -31,6 +31,8 @@ Route::prefix('tr')->group(function() {
     Route::get('blog', [HomeController::class, 'blog'])->name('tr.blog');
     Route::get('rezervasyon', [HomeController::class, 'booking'])->name('tr.reservation');
     Route::get('iletisim', [HomeController::class, 'contact'])->name('tr.contact');
+    Route::get('subeler', [HomeController::class, 'branches'])->name('tr.branches');
+    Route::get('sube-detay/{slug}', [HomeController::class, 'branch_details'])->name('tr.branch_details');
     Route::get('blog_detay/{slug}', [HomeController::class, 'blogDetails'])->name('tr.blog_details');
     Route::post('book_a_table', [HomeController::class, 'book_a_table_form'])->name('tr.book_a_table');
 
@@ -46,6 +48,8 @@ Route::prefix('en')->group(function() {
     Route::get('blog', [HomeController::class, 'blog'])->name('en.blog');
     Route::get('reservation', [HomeController::class, 'booking'])->name('en.reservation');
     Route::get('contact', [HomeController::class, 'contact'])->name('en.contact');
+    Route::get('branches', [HomeController::class, 'branches'])->name('en.branches');
+    Route::get('branch-details/{slug}', [HomeController::class, 'branch_details'])->name('en.branch_details');
     Route::get('blog_details/{slug}', [HomeController::class, 'blogDetails'])->name('en.blog_details');
     Route::post('book_a_table', [HomeController::class, 'book_a_table_form'])->name('en.book_a_table');
 
@@ -59,6 +63,8 @@ Route::prefix('ar')->group(function() {
     Route::get('mudawwanat', [HomeController::class, 'blog'])->name('ar.blog');
     Route::get('hajz', [HomeController::class, 'booking'])->name('ar.reservation');
     Route::get('ittisal', [HomeController::class, 'contact'])->name('ar.contact');
+    Route::get('furoo', [HomeController::class, 'branches'])->name('ar.branches');
+    Route::get('tafaasil-furoo/{slug}', [HomeController::class, 'branch_details'])->name('ar.branch-details');
     Route::get('tafaasil-mudawwanat/{slug}', [HomeController::class, 'blogDetails'])->name('ar.blog_details');
     Route::post('book_a_table', [HomeController::class, 'book_a_table_form'])->name('ar.book_a_table');
 

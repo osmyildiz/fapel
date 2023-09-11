@@ -48,6 +48,7 @@ return [
     'food_menu' => 'قائمة الطعام',
     'details' => 'تفاصيل',
     'branches' => 'فروعنا',
+    'branches1' => 'فروعنا',
     'branch' => 'فرع',
     'all' => 'الكل',
     'categories' => 'التصنيفات',

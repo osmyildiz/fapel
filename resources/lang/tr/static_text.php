@@ -45,6 +45,7 @@ return [
     'food_menu' => 'Menü',
     'details' => 'Detay',
     'branches' => 'Şubelerimiz',
+    'branches1' => 'Şubeler',
     'branch' => 'Şube',
     'all' => 'Tümü',
     'categories' => 'Kategoriler',

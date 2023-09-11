@@ -201,6 +201,24 @@ class HomeController extends Controller
 
 
     }
+    public function branches()
+    {
+        $slider = Slider::where('is_active',1)
+            ->where('page_name','branches')
+            ->first();
+        $records = Branch::where('is_active',1)->orderBy('priority','ASC')->get();
+        $seo = Seo::where('page_name','branches')
+            ->first();
+
+        $contact = Contact::find(1);
+
+
+        $this->setSEO($seo);
+
+        return view('branches',compact('records','slider','contact'));
+
+
+    }
     public function booking()
     {
         $slider = Slider::where('is_active',1)
@@ -255,161 +273,8 @@ class HomeController extends Controller
 
 
     }
-    public function menu_single($slug)
-    {
-        $slider = Slider::where('is_active',1)
-            ->where('page_name','menu')
-            ->first();
-
-        $menus=Menu::selectRaw('categories.name as category_name,menus.*')
-            ->join('categories', 'categories.id', '=', 'menus.category_id')
-            ->where('menus.is_active',1)
-            ->where('categories.is_active',1)
-            ->where('categories.slug',$slug)
-            ->orderBy('menus.priority','ASC')
-            ->get();
-        $category_name = Category::where('slug',$slug)->first();
-
-        $seo = Seo::find(3);
-
-        $this->setSEO($seo);
-
-        return view('menu_single',compact('slider','menus','category_name'));
 
 
-    }
-    public function book_a_table_form1(Request $request)
-    {
-
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|regex:/^[a-zA-Z\s]+$/',                        // just a normal required validation
-            'email' => 'required|email',     // required and must be unique in the ducks table
-            'phone' => 'required',
-            'branch' => 'required|not_in:99',
-            'guest_number' => 'required|numeric',          // required and has to match the password field
-            'time' => 'required',          // required and has to match the password field
-            'res_date' => 'required',          // required and has to match the password field
-
-
-        ],
-            [
-                'name.required' => 'Ad alanı gereklidir.',
-                'branch.not_in' => 'Lütfen şube seçiniz.',
-                'email.required' => 'E-posta adresi gereklidir.',
-                'branch.required' => 'Şube gereklidir.',
-                'guest_number.required' => 'Misafir sayısı gereklidir.',
-                'email.email' => 'Geçerli bir e-posta adresi giriniz.',
-                'phone.required' => 'Telefon numarası gereklidir.',
-                'time.required' => 'Saat gereklidir.',
-                'res_date.required' => 'Tarih gereklidir.',
-                'name.regex' => 'Ad alanı sadece harf içermelidir.',
-                'guest_number.numeric' => 'Misafir sayısı numerik bir değer olmalıdır.'
-            ]
-
-        );
-
-        if ($validator->fails()) {
-            return redirect(url()->previous() .'#reservation')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        //$check_mail = Form::where('email', $request->email)->first();
-        //if ($check_mail) {
-        //    return redirect()->back()->with('danger', 'Email address already subscribed.');
-        //    //return back()->with('danger', 'Bu email ile daha önce kayıt olunmuş. Lütfen farklı bir email ile deneyiniz!');
-        //}
-        $hasHttpLink = preg_match('/\b(?:https?|ftp):\/\/\S+\b/', $request->message);
-
-        if ($hasHttpLink) {
-            return redirect()->back()->with(['message' => "Teşekkür ederiz, mesajınızı aldık. Ekibimizden biri yakında sizinle iletişime geçecek...", 'alert' => 'success']);
-        }
-        $spamKeywords = [
-            'spam',
-            'advertisement',
-            'promotions',
-
-            'guaranteed',
-            'limited time',
-            'act now',
-            'buy now',
-            'cash',
-            'earn money',
-            'extra income',
-
-            'credit card',
-            'lottery',
-            'prize',
-            'win',
-            'enlargement',
-            'viagra',
-            'cialis',
-            'online pharmacy',
-            'make money fast',
-            'weight loss',
-            'investment opportunity',
-            'million dollars',
-            'nigerian prince',
-            'inheritance',
-            'urgent',
-            'exclusive offer',
-        ];
-
-        foreach ($spamKeywords as $keyword) {
-            if (stripos($request->message, $keyword) !== false) {
-                return redirect()->back()->with(['message' => "Thank you,We've received your message. Someone from our team will contact you soon...", 'alert' => 'success']);
-            }
-        }
-        $phoneNumber = $request->phone;
-
-
-        $form = new Reservation();
-        $form->name = $request->name;
-        $form->time = $request->time;
-        $form->guest_number = $request->guest_number;
-        $form->res_date = date('Y-m-d',strtotime($request->res_date));
-        $form->email = $request->email;
-        $form->phone = $request->phone;
-        $form->message = $request->message;
-        $form->created_at = date('Y-m-d H:i:s');
-        $form->updated_at = date('Y-m-d H:i:s');
-        $save = $form->save();
-
-        $data = [
-            'subject1' => 'Fapel Ocakbaşı Rezervasyon',
-            'email1' => $request->email,
-            'email' => "fapelgida@gmail.com",
-            'email' => "osmyildiz@gmail.com",
-            'name' => $request->name,
-            'time' => $request->time,
-            'res_date' => $request->res_date,
-            'guest_number' => $request->guest_number,
-            'phone' => $request->phone,
-            'branch' => $request->branch,
-            'message1' => $request->message,
-        ];
-
-
-
-
-
-        Mail::send('emailbooking', $data, function ($message) use ($data) {
-            $message->to($data['email'])
-                ->subject($data['subject1'])
-                ->replyTo($data['email1'], $data['name']);
-        });
-
-
-
-        if($save){
-
-            return redirect(url()->previous() .'#reservation')->with(['message' => "Thank you for your reservation! We can't wait to host you and make your dining experience unforgettable.", 'alert' => 'success']);
-
-        }
-        return redirect(url()->previous() .'#reservation')->with(['message' => 'An unexpected error has occurred. Please try again.!', 'alert' => 'danger']);
-
-    }
     public function book_a_table_form(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -475,184 +340,6 @@ class HomeController extends Controller
 
     }
 
-    public function add_subscriber(Request $request)
-    {
-        $validator = Validator::make($request->only('email'), [
-            'email' => 'required|email|unique:subscribers,email',     // required and must be unique in the ducks table
-        ], [
-            'email.required' => 'Email address is required.',
-            'email.email' => 'Enter a valid email address.',
-            'email.unique' => 'Email address already subscribed.',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect(url()->previous() .'#footer')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $form = new Subscriber();
-        $form->email = $request->email;
-        $form->created_at = date('Y-m-d H:i:s');
-        $form->updated_at = date('Y-m-d H:i:s');
-        $save = $form->save();
-
-        $data = [
-            'email1' => $request->email,
-            //'email' => "osmyildiz@gmail.com",
-            'email' => "the.tcr.bar@gmail.com",
-            'subject' => "New Subscriber",
-        ];
-
-        Mail::send('emailsubscriber', $data, function ($message) use ($data) {
-            $message->to($data['email'])
-                ->subject($data['subject']);
-        });
-
-        if($save) {
-            return redirect(url()->previous() .'#footer')
-                ->with(['message' => "Welcome to TCR Bar. We're so glad you've joined us.", 'alert' => 'success']);
-        }
-
-        return redirect(url()->previous() .'#footer')->
-        with(['message' => 'An unexpected error has occurred. Please try again.!', 'alert' => 'danger']);
-    }
-    public function add_send_contact_form(Request $request)
-    {
-
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',                        // just a normal required validation
-            'email' => 'required|email',     // required and must be unique in the ducks table
-            'phone' => 'required',
-
-
-        ],
-            [
-                'name.required' => 'Name is required.',                        // just a normal required validation
-                'email.required' => 'Email address is required.',     // required and must be unique in the ducks table
-                'email.email' => 'Enter a valid email address.',     // required and must be unique in the ducks table
-                'phone.required' => 'Phone is required.',
-
-            ]
-        );
-
-        if ($validator->fails()) {
-            return redirect(url()->previous() .'#contactform')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $recaptchaResponse = $request->input('g-recaptcha-response');
-        $secret = config('services.recaptcha.secret_key');
-
-        $client = new Client();
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $secret,
-                'response' => $recaptchaResponse,
-            ],
-        ]);
-
-
-        $recaptcha = json_decode($response->getBody());
-
-        if (!$recaptcha->success) {
-            return redirect()->back()
-                ->withInput($request->all()) // Girilmiş değerleri formda döndürmek için
-                ->with(['message' => 'reCAPTCHA verification failed. Please try again.', 'alert' => 'danger']);
-
-        }
-
-
-        //$check_mail = Form::where('email', $request->email)->first();
-        //if ($check_mail) {
-        //    return redirect()->back()->with('danger', 'Email address already subscribed.');
-        //    //return back()->with('danger', 'Bu email ile daha önce kayıt olunmuş. Lütfen farklı bir email ile deneyiniz!');
-        //}
-
-        $hasHttpLink = preg_match('/\b(?:https?|ftp):\/\/\S+\b/', $request->message);
-
-        if ($hasHttpLink) {
-            return redirect()->back()->with(['message' => "Thank you,We've received your message. Someone from our team will contact you soon...", 'alert' => 'success']);
-        }
-        $spamKeywords = [
-            'spam',
-            'advertisement',
-            'promotions',
-
-            'guaranteed',
-            'limited time',
-            'act now',
-            'buy now',
-            'cash',
-            'earn money',
-            'extra income',
-
-            'credit card',
-            'lottery',
-            'prize',
-            'win',
-            'enlargement',
-            'viagra',
-            'cialis',
-            'online pharmacy',
-            'make money fast',
-            'weight loss',
-            'investment opportunity',
-            'million dollars',
-            'nigerian prince',
-            'inheritance',
-            'urgent',
-            'exclusive offer',
-        ];
-
-        foreach ($spamKeywords as $keyword) {
-            if (stripos($request->message, $keyword) !== false) {
-                return redirect()->back()->with(['message' => "Thank you,We've received your message. Someone from our team will contact you soon...", 'alert' => 'success']);
-            }
-        }
-        $phoneNumber = $request->phone;
-
-        $validPhonePattern = '/^(\+4407|\+4402|07|02)/'; // Telefon numarası için geçerli desen
-
-        if (!preg_match($validPhonePattern, $phoneNumber)) {
-            return redirect()->back()->with(['message' => "Thank you,We've received your message. Someone from our team will contact you soon...", 'alert' => 'success']);
-        }
-        $form = new Form();
-        $form->name = $request->name;
-        $form->email = $request->email;
-        $form->phone = $request->phone;
-        $form->message = $request->message;
-        $form->created_at = date('Y-m-d H:i:s');
-        $form->updated_at = date('Y-m-d H:i:s');
-        $save = $form->save();
-
-        $data = [
-            'subject1' => 'Contact Form',
-            'email1' => $request->email,
-            'email' => "the.tcr.bar@gmail.com",
-            //'email' => "osmyildiz@gmail.com",
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'message1' => $request->message,
-        ];
-
-
-        Mail::send('emailcontact', $data, function ($message) use ($data) {
-            $message->to($data['email'])
-                ->subject("Contact Form");
-        });
-
-
-        if($save){
-
-            return redirect()->back()->with(['message' => "Thank you for contacting us. We appreciate your message and will get back to you as soon as possible.", 'alert' => 'success']);
-
-        }
-        return redirect()->back()->with(['message' => 'An unexpected error has occurred. Please try again.!', 'alert' => 'danger']);
-
-    }
 
     protected function setSEO($seo)
     {

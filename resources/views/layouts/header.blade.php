@@ -43,6 +43,9 @@
                                         <a class="nav-link" href="{{ route(app()->getLocale() . '.gallery') }}">{{ __('static_text.gallery') }}</a>
                                     </li>
                                     <li>
+                                        <a class="nav-link" href="{{ route(app()->getLocale() . '.branches') }}">{{ __('static_text.branches1') }}</a>
+                                    </li>
+                                    <li>
                                         <a class="nav-link" href="{{ route(app()->getLocale() . '.blog') }}">{{ __('static_text.blog') }}</a>
                                     </li>
                                     <li>
@@ -173,6 +176,9 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ route(app()->getLocale() . '.gallery') }}">{{ __('static_text.gallery') }}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route(app()->getLocale() . '.branches') }}">{{ __('static_text.branches1') }}</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ route(app()->getLocale() . '.blog') }}">{{ __('static_text.blog') }}</a>

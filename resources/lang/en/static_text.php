@@ -44,6 +44,7 @@ return [
     'details' => 'Details',
     'branches' => 'Our Branches',
     'branch' => 'Branch',
+    'branches1' => 'Branches',
     'all' => 'All',
     'categories' => 'Categories',
     'recent_posts' => 'Recent Posts',
