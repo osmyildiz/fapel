@@ -1230,28 +1230,33 @@ class AdminController extends Controller
     {
         // Doğrulama Kuralları
         $validatedData = $request->validate([
-            'first_title_tr' => 'required|string',
-            'first_title_en' => 'required|string',
-            'first_title_ar' => 'required|string',
-            'second_title_tr' => 'required|string',
-            'second_title_en' => 'required|string',
-            'second_title_ar' => 'required|string',
+            'content_tr' => 'required|string',
+            'content_en' => 'required|string',
+            'content_ar' => 'required|string',
+            'name' => 'required|string',
+            'map' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required',
+            'weekday_opening_time' => 'required|string',
+            'weekend_opening_time' => 'required|string',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'priority' => 'required|integer',
         ]);
 
-        $slider = new Slider();
+        $record = new Branch();
 
-        $slider->page_name = "home"; // Sabit olarak "home" atanıyor, değişebilir.
-        $slider->first_title_tr = $request->first_title_tr;
-        $slider->first_title_en = $request->first_title_en;
-        $slider->first_title_ar = $request->first_title_ar;
-        $slider->second_title_tr = $request->second_title_tr;
-        $slider->second_title_en = $request->second_title_en;
-        $slider->second_title_ar = $request->second_title_ar;
 
-        $slider->is_active = $request->has('is_active') ? 1 : 0;
-        $slider->priority = $request->priority;
+        $record->content_tr = $request->content_tr;
+        $record->content_en = $request->content_en;
+        $record->content_ar = $request->content_ar;
+        $record->name = $request->name;
+        $record->phone = $request->phone;
+        $record->address = $request->address;
+        $record->weekend_opening_time = $request->weekend_opening_time;
+        $record->weekday_opening_time = $request->weekday_opening_time;
+
+        $record->is_active = $request->has('is_active') ? 1 : 0;
+        $record->priority = $request->priority;
 
 
         if ($request->hasFile('img')) {
@@ -1266,13 +1271,13 @@ class AdminController extends Controller
             $image = Image::make($imageFile);
 
             // Dosyayı orijinal uzantısına göre kaydet
-            $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
-            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
+            $image->save(public_path("/assets1/images/" . $imageName . '.' . $extension));
+            $record->img = "/assets1/images/" . $imageName . '.' . $extension;
         }
 
 
-        if($slider->save()){
-            return back()->with('success', 'Yeni slider başarıyla eklendi.');
+        if($record->save()){
+            return back()->with('success', 'Yeni Şube başarıyla eklendi.');
         }
 
         return back()->with('danger', 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin!');
@@ -1280,9 +1285,9 @@ class AdminController extends Controller
 
     public function branch_edit($id)
     {
-        $slider = Slider::find($id);
+        $record = Branch::find($id);
 
-        return view('admin.slider-edit',compact('slider'));
+        return view('admin.branch-edit',compact('record'));
 
     }
     public function branch_update(Request $request, $id)
@@ -1293,15 +1298,21 @@ class AdminController extends Controller
             $is_active = 0;
         }
 
-        $slider = Slider::find($id);
+        $record = Branch::find($id);
 
-        foreach (['tr', 'en', 'ar'] as $lang) {
-            $slider->{'first_title_' . $lang} = $request->input('first_title_' . $lang);
-            $slider->{'second_title_' . $lang} = $request->input('second_title_' . $lang);
-        }
 
-        $slider->is_active = $is_active;
-        $slider->priority = $request->priority;
+
+        $record->is_active = $is_active;
+        $record->priority = $request->priority;
+        $record->content_tr = $request->content_tr;
+        $record->content_en = $request->content_en;
+        $record->content_ar = $request->content_ar;
+        $record->name = $request->name;
+        $record->phone = $request->phone;
+        $record->address = $request->address;
+        $record->weekend_opening_time = $request->weekend_opening_time;
+        $record->weekday_opening_time = $request->weekday_opening_time;
+
 
         if ($request->hasFile('img')) {
             $imageFile = $request->img;
@@ -1316,13 +1327,13 @@ class AdminController extends Controller
 
             // Dosyayı orijinal uzantısına göre kaydet
             $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
-            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
+            $record->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
         }
 
-        $save = $slider->save();
+        $save = $record->save();
 
         if($save) {
-            return back()->with('success', 'Slider başarıyla güncellendi.');
+            return back()->with('success', 'Şube başarıyla güncellendi.');
         }
 
         return back()->with('danger', 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin!');
@@ -1330,18 +1341,18 @@ class AdminController extends Controller
 
     public function branch_delete($id)
     {
-        $slider = Slider::find($id);
-        $pageName = $slider->page_name;
-        $count = Slider::where('page_name', $pageName)->count();
+        $record = Branch::find($id);
+
+        $count = Branch::count();
 
         if ($count === 1) {
-            return back()->with('warning', 'Tek bir slayt kaldığından bu slayt silinemez. Sadece düzenleme yapabilirsiniz.');
+            return back()->with('warning', 'Tek bir şube kaldığından bu şube silinemez. Sadece düzenleme yapabilirsiniz.');
         }
 
-        $res = Slider::destroy($id);
+        $res = Branch::destroy($id);
 
         if ($res) {
-            return back()->with('success', 'Seçili slayt başarıyla silindi.');
+            return back()->with('success', 'Seçili kayıt başarıyla silindi.');
         }
 
         return back()->with('danger', 'An unexpected error occured. Please try again!');

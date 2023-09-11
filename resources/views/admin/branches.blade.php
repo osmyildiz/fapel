@@ -201,7 +201,7 @@
                                 <th>İçerik (TR)</th>
                                 <th>İçerik (EN)</th>
                                 <th>İçerik (AR)</th>
-                                <th>Map</th>
+
                                 <th>Öncelik</th>
                                 <th>Aktif Mi?</th>
                                 <th>Düzenle/Sil</th>
@@ -225,9 +225,12 @@
                                             <td>{{$branch->name}}</td>
                                             <td>{{$branch->phone}}</td>
                                             <td>{{$branch->address}}</td>
-                                            <td>{{$branch->content_tr}}</td>
-                                            <td>{{$branch->content_en}}</td>
-                                            <td>{{$branch->content_ar}}</td>
+                                            <td>{{$branch->weekday_opening_time}}</td>
+                                            <td>{{$branch->weekend_opening_time}}</td>
+                                            <td>{!! mb_substr(strip_tags(htmlspecialchars_decode($branch->content_tr)), 0,150) !!}...</td>
+                                            <td>{!! mb_substr(strip_tags(htmlspecialchars_decode($branch->content_en)), 0,150) !!}...</td>
+                                            <td>{!! mb_substr(strip_tags(htmlspecialchars_decode($branch->content_ar)), 0,150) !!}...</td>
+
                                             <td>{{$branch->priority}}</td>
                                             <td>{{$branch->is_active==1?"Aktif":"Pasif"}}</td>
                                             <td>
@@ -235,9 +238,9 @@
                                                     <li class="list-inline-item px-1">
                                                         <a href="{{route('branch.edit',$branch->id)}}" title="edit" class="btn btn-xs btn-warning"><i class="bx bxs-edit text-white"></i></a>
                                                     </li>
-                                                    @if($branch->page_name=="home")
+
                                                     <li class="list-inline-item px-1">
-                                                        <form method="POST" action="{{ route('branch.delete',$slider->id) }}">
+                                                        <form method="POST" action="{{ route('branch.delete',$branch->id) }}">
                                                             @csrf
 
                                                                 <input name="_method" type="hidden" value="DELETE">
@@ -246,7 +249,7 @@
                                                             <button type="submit" class="btn btn-xs btn-danger  show_confirm" data-toggle="tooltip" title='Delete'><i class="bx bxs-trash"></i></button>
                                                         </form>
                                                     </li>
-                                                    @endif
+
                                                 </ul>
                                             </td>
                                         </tr>
