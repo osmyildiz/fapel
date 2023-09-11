@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\AboutUs;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Form;
@@ -1218,6 +1219,134 @@ class AdminController extends Controller
         }
 
         return back()->with('danger', 'An unexpected error occured. Please try again.!!');
+    }
+
+    public function branch()
+    {
+        $records = Branch::orderBy('priority','ASC')->get();
+
+        return view('admin.branches',compact('records'));
+
+    }
+    public function add_branch(Request $request)
+    {
+        // Doğrulama Kuralları
+        $validatedData = $request->validate([
+            'first_title_tr' => 'required|string',
+            'first_title_en' => 'required|string',
+            'first_title_ar' => 'required|string',
+            'second_title_tr' => 'required|string',
+            'second_title_en' => 'required|string',
+            'second_title_ar' => 'required|string',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'priority' => 'required|integer',
+        ]);
+
+        $slider = new Slider();
+
+        $slider->page_name = "home"; // Sabit olarak "home" atanıyor, değişebilir.
+        $slider->first_title_tr = $request->first_title_tr;
+        $slider->first_title_en = $request->first_title_en;
+        $slider->first_title_ar = $request->first_title_ar;
+        $slider->second_title_tr = $request->second_title_tr;
+        $slider->second_title_en = $request->second_title_en;
+        $slider->second_title_ar = $request->second_title_ar;
+
+        $slider->is_active = $request->has('is_active') ? 1 : 0;
+        $slider->priority = $request->priority;
+
+
+        if ($request->hasFile('img')) {
+            $imageFile = $request->img;
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
+
+            $extension = $imageFile->getClientOriginalExtension();
+
+            $image = Image::make($imageFile);
+
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
+            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
+        }
+
+
+        if($slider->save()){
+            return back()->with('success', 'Yeni slider başarıyla eklendi.');
+        }
+
+        return back()->with('danger', 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin!');
+    }
+
+    public function branch_edit($id)
+    {
+        $slider = Slider::find($id);
+
+        return view('admin.slider-edit',compact('slider'));
+
+    }
+    public function branch_update(Request $request, $id)
+    {
+        if($request->is_active == "on"){
+            $is_active = 1;
+        } else {
+            $is_active = 0;
+        }
+
+        $slider = Slider::find($id);
+
+        foreach (['tr', 'en', 'ar'] as $lang) {
+            $slider->{'first_title_' . $lang} = $request->input('first_title_' . $lang);
+            $slider->{'second_title_' . $lang} = $request->input('second_title_' . $lang);
+        }
+
+        $slider->is_active = $is_active;
+        $slider->priority = $request->priority;
+
+        if ($request->hasFile('img')) {
+            $imageFile = $request->img;
+            $id = mt_rand(10000, 99999);
+            $imageName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $imageName = str_replace(' ', '-', $imageName);
+            $imageName = $imageName . "-" . $id;
+
+            $extension = $imageFile->getClientOriginalExtension();
+
+            $image = Image::make($imageFile);
+
+            // Dosyayı orijinal uzantısına göre kaydet
+            $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
+            $slider->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
+        }
+
+        $save = $slider->save();
+
+        if($save) {
+            return back()->with('success', 'Slider başarıyla güncellendi.');
+        }
+
+        return back()->with('danger', 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin!');
+    }
+
+    public function branch_delete($id)
+    {
+        $slider = Slider::find($id);
+        $pageName = $slider->page_name;
+        $count = Slider::where('page_name', $pageName)->count();
+
+        if ($count === 1) {
+            return back()->with('warning', 'Tek bir slayt kaldığından bu slayt silinemez. Sadece düzenleme yapabilirsiniz.');
+        }
+
+        $res = Slider::destroy($id);
+
+        if ($res) {
+            return back()->with('success', 'Seçili slayt başarıyla silindi.');
+        }
+
+        return back()->with('danger', 'An unexpected error occured. Please try again!');
     }
 
 

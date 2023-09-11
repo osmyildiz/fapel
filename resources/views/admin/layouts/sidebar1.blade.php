@@ -34,6 +34,13 @@
                     </a>
 
                 </li>
+                <li >
+                    <a href="/admin-branch">
+                        <i class="bx  bxs-user-detail"></i>
+                        <span key="t-crypto">Şubeler</span>
+                    </a>
+
+                </li>
 
 
                 <li >

@@ -74,18 +74,6 @@ Route::prefix('ar')->group(function() {
 
 
 
-//Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
-//Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
-//Route::get('/menu_single/{slug}', [App\Http\Controllers\HomeController::class, 'menu_single'])->name('menu_single');
-//Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
-//Route::get('/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
-//Route::get('/booking', [App\Http\Controllers\HomeController::class, 'booking'])->name('booking');
-//Route::get('/privacy', [App\Http\Controllers\HomeController::class, 'privacy'])->name('privacy');
-//Route::post('/add_send_contact_form', [App\Http\Controllers\HomeController::class, 'add_send_contact_form'])->name('add_send_contact_form');
-//Route::post('/add_subscriber', [App\Http\Controllers\HomeController::class, 'add_subscriber'])->name('add_subscriber');
-//
-//
-//
 Auth::routes();
 Route::get('/admin', [AdminController::class, 'root'])->name('root');
 Route::get('/home', [AdminController::class, 'home'])->name('home');
@@ -116,6 +104,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get ('/slider-edit/{id}', [AdminController::class, 'slider_edit'])->name('slider.edit');
     Route::post('/slider-update/{id}', [AdminController::class, 'slider_update'])->name('slider.update');
     Route::delete('/slider-delete/{id}', [AdminController::class, 'slider_delete'])->name('slider.delete');
+
+    Route::get('/admin-branch', [AdminController::class, 'branch'])->name('admin_branch');
+    Route::post('/add-branch', [AdminController::class, 'add_branch'])->name('add_branch');
+    Route::get ('/branch-edit/{id}', [AdminController::class, 'branch_edit'])->name('branch.edit');
+    Route::post('/branch-update/{id}', [AdminController::class, 'branch_update'])->name('branch.update');
+    Route::delete('/branch-delete/{id}', [AdminController::class, 'branch_delete'])->name('branch.delete');
+
 
     Route::get('/admin-photos', [AdminController::class, 'admin_photos'])->name('admin-photos');
     Route::post('/update-photo/{id}', [AdminController::class, 'update_photo'])->name('photo.update');
