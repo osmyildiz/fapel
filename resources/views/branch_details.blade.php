@@ -157,11 +157,11 @@
                     <select id="branch" name="branch" >
                         <option value="99" {{ (old('branch') == '99') ? 'selected' : '' }}>{{__('static_text.branch1')}}</option>
                         @foreach($branches as $branch)
-                            <option value="{{ $branch->name }}" {{ (old('branch') == $branch->name) ? 'selected' : '' }}>{{ $branch->name }}</option>
+                            <option value="{{ $branch->name }}" {{ (old('branch') == $branch->name || (isset($record) && $record->name == $branch->name)) ? 'selected' : '' }}>{{ $branch->name }}</option>
                         @endforeach
                     </select>
-
                 </div>
+
 
 
                 <!-- Alt satır -->
