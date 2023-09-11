@@ -1223,9 +1223,9 @@ class AdminController extends Controller
 
     public function branch()
     {
-        $records = Branch::orderBy('priority','ASC')->get();
+        $branches = Branch::orderBy('priority','ASC')->get();
 
-        return view('admin.branches',compact('records'));
+        return view('admin.branches',compact('branches'));
 
     }
     public function add_branch(Request $request)
