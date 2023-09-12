@@ -232,7 +232,7 @@ class HomeController extends Controller
         where('is_active',1)
         ->where("slug_tr",$slug)
             ->orderBy('priority','ASC')->first();
-        $seo = Seo::where('page_name','branches')
+        $seo = Seo::where('page_name',$slug)
             ->first();
         $branches = Branch::where('is_active',1)
             ->orderBy('priority','ASC')->get();
