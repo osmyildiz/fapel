@@ -85,12 +85,7 @@
         $(document).ready(function() {
             var $grid = $('.gallery-area-inner .row');
 
-            // Resimler yüklendiğinde Isotope'yu başlat
-            $grid.imagesLoaded().progress(function() {
-                $grid.isotope({
-                    itemSelector: '.col-lg-3'
-                });
-            });
+
 
 
             $('.gf_btn').on('click', function() {
