@@ -82,7 +82,7 @@
 
                                             <input type="file" class="form-control" id="menu_url" name="menu_url">
                                         </div>
-                                        <span class="invalid-feedback" role="alert">
+                                        <span>
                                             {{$record->menu_url}}
                                         </span>
                                     </div>
