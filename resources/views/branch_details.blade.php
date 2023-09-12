@@ -51,13 +51,14 @@
 
 
                                 <ul class="single-categories">
-                                    <li><a href="{{ route($lang . '.menu') }}">{{__('static_text.menu')}}<i class="far fa-long-arrow-right"></i></a></li>
+                                    <li><a href="{{ $record->menu_url }}" target="_blank">{{__('static_text.menu')}}<i class="far fa-long-arrow-right"></i></a></li>
                                 </ul>
                             <ul class="single-categories">
-                                <li><a href="{{ route($lang . '.contact') }}">{{__('static_text.contact')}}<i class="far fa-long-arrow-right"></i></a></li>
+                                <li><a href="{{ route($lang . '.contact') }}#contactDiv">{{__('static_text.contact')}}<i class="far fa-long-arrow-right"></i></a></li>
+
                             </ul>
                             <ul class="single-categories">
-                                <li><a href="{{ route($lang . '.reservation') }}">{{__('static_text.book_a_table')}}<i class="far fa-long-arrow-right"></i></a></li>
+                                <li><a href="{{ route($lang . '.reservation') }}#reservation">{{__('static_text.book_a_table')}}<i class="far fa-long-arrow-right"></i></a></li>
                             </ul>
 
 

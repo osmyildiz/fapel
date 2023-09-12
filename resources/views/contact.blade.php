@@ -7,7 +7,7 @@
     @include('partials.breadcrumb', ['slider' => $slider])
     <!-- rts team area start -->
     <!-- contact area start -->
-    <div class="rts-contact-area">
+    <div class="rts-contact-area" id="contactDiv">
         <div class="contact-area-inner">
             <div class="row align-items-center">
                 <div class="col-lg-6">

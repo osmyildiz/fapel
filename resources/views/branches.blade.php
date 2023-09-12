@@ -9,11 +9,9 @@
             <div class="row text-center">
                 <div class="col-lg-12">
                     <div class="banner-one-wrapper">
-                        <div class="title-img" data-sal="zoom-in" data-sal-delay="100" data-sal-duration="800">
-                            <img src="{{asset('assets1/images/about/title-shape.png')}}" alt="about">
-                        </div>
+
                         <h1 class="title-banner" data-sal="slide-up" data-sal-delay="120" data-sal-duration="800">
-                            {{__('static_text.branches1')}}
+                            <br>
                         </h1>
 
                     </div>
@@ -29,19 +27,20 @@
                         @foreach($records as $record)
                             <div class="swiper-slide">
                                 <div class="blog-wrapper">
-                                    <div class="image-part">
-                                        <a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}">
+                                    <a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}"> <!-- Bu satır eklendi -->
+                                        <div class="image-part">
                                             <img src="{{ asset($record->img) ?? asset('assets1/images/blog/blog-01.jpg') }}" alt="blog">
-                                        </a>
-
-                                    </div>
+                                        </div>
+                                    </a> <!-- Bu satır eklendi -->
 
                                     <div class="content">
-
-                                        <h3 class="title"><a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}">{{ $record->name }}</a></h3>
+                                        <h3 class="title">
+                                            <a href="{{ route($lang . '.branch_details', $record->{'slug_'.$lang} ) }}">{{ $record->name }}</a>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
 
 
