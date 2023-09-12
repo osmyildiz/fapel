@@ -28042,16 +28042,16 @@ p.desc {
 }
 
 .rts-gallery-area .gallery-area-inner {
-  position: relative;
-  width: 100%;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  padding: 15px;
+    position: relative;
+    width: 100%;
+    display: flex; /* Eklediğim kısım */
+    flex-direction: row; /* Eklediğim kısım */
+    flex-wrap: wrap;
+    justify-content: space-between; /* Eklediğim kısım */
+    align-content: flex-start;
+    padding: 15px;
 }
-.rts-gallery-area .gallery-area-inner .gallery-image {
-  overflow: hidden;
-  transition: all 0.5s;
-}
+
 @media (max-width: 768px) {
   .rts-gallery-area .gallery-area-inner .gallery-image {
     margin-bottom: 16px;
