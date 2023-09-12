@@ -70,7 +70,7 @@
     </div>
 
     <!-- jQuery önce yüklenmeli -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
 
@@ -82,32 +82,17 @@
 
 
     <script>
-
         $(document).ready(function() {
-
-            // İsotope başlatılıyor
-            var grid = $('.menu-area-2-inner .row').isotope({
-                itemSelector: '.col-lg-6',
-                layoutMode: 'masonry',
+            var $grid = $('.gallery-area-inner .row').isotope({
+                itemSelector: '.col-lg-3'
             });
 
             $('.gf_btn').on('click', function() {
-                $(".gf_btn").removeClass('filter-active');
-                $(this).addClass('filter-active');
-                grid.isotope({
-                    filter: $(this).data('filter')
-                });
-
-                // Kategori başlığını ve açıklamasını güncelleme
-                let titleBanner = $('#banner-title1');
-                let desc = $('#banner-desc1');
-
-                titleBanner.text($(this).data('name'));
-                desc.text($(this).data('description'));
+                $('.gf_btn').removeClass('active');  // Tüm butonlardan 'active' sınıfını kaldır
+                $(this).addClass('active');  // Tıklanan butona 'active' sınıfını ekle
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
             });
-
-            $('.gf_btn[data-filter="*"]').click();
-
             $('.dynamic-popup').on('click', function(e) {
                 e.preventDefault();
             });
@@ -134,9 +119,8 @@
                     }
                 }
             });
+
         });
-
-
 
 
     </script>
