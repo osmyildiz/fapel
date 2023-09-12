@@ -1240,8 +1240,10 @@ class AdminController extends Controller
             'weekday_opening_time' => 'required|string',
             'weekend_opening_time' => 'required|string',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'menu_url' => 'required|mimes:pdf', // Menu PDF için eklenen kısım
             'priority' => 'required|integer',
         ]);
+
 
         $record = new Branch();
 
@@ -1277,6 +1279,19 @@ class AdminController extends Controller
             $image->save(public_path("/assets1/images/" . $imageName . '.' . $extension));
             $record->img = "/assets1/images/" . $imageName . '.' . $extension;
         }
+        if ($request->hasFile('menu_url')) {
+            $pdfFile = $request->menu_url; // PDF dosyasını al
+            $id = mt_rand(10000, 99999);
+            $pdfName = pathinfo($pdfFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $pdfName = str_replace(' ', '-', $pdfName);
+            $pdfName = $pdfName . "-" . $id;
+            $extension = $pdfFile->getClientOriginalExtension();
+
+            // Orijinal uzantısını koruyarak dosyayı kaydet
+            $pdfFile->move(public_path("/assets1/pdf/"), $pdfName . '.' . $extension);
+            $record->menu_url = "/assets1/pdf/" . $pdfName . '.' . $extension;
+        }
+
 
 
         if($record->save()){
@@ -1335,6 +1350,19 @@ class AdminController extends Controller
             $image->save(public_path("/assets1/images/slider/" . $imageName . '.' . $extension));
             $record->img = "/assets1/images/slider/" . $imageName . '.' . $extension;
         }
+        if ($request->hasFile('menu_url')) {
+            $pdfFile = $request->menu_url; // PDF dosyasını al
+            $id = mt_rand(10000, 99999);
+            $pdfName = pathinfo($pdfFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $pdfName = str_replace(' ', '-', $pdfName);
+            $pdfName = $pdfName . "-" . $id;
+            $extension = $pdfFile->getClientOriginalExtension();
+
+            // Orijinal uzantısını koruyarak dosyayı kaydet
+            $pdfFile->move(public_path("/assets1/pdf/"), $pdfName . '.' . $extension);
+            $record->menu_url = "/assets1/pdf/" . $pdfName . '.' . $extension;
+        }
+
 
         $save = $record->save();
 

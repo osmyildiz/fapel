@@ -74,6 +74,15 @@
                                     </div>
                                 </div>
 
+                                <div class="row mb-4">
+                                    <label for="menu_url" class="col-sm-3 col-form-label">Menü Dosyası(PDF)</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" id="menu_url" name="menu_url">
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="row mb-4">
                                     <label for="weekday_opening_time" class="col-sm-3 col-form-label">Hafta içi Açık Saatler</label>

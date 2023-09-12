@@ -84,6 +84,21 @@
                             </div>
                         </div>
 
+                        <div class="row mb-4">
+                            <label for="menu_url" class="col-sm-3 col-form-label">Menü Dosyası</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="file" class="form-control @error('menu_url') is-invalid @enderror" id="menu_url" name="menu_url">
+                                    @error('menu_url')
+                                    <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+
 
                         <div class="row mb-4">
                             <label for="weekday_opening_time" class="col-sm-3 col-form-label">Hafta içi Açık Saatler</label>
