@@ -77,8 +77,9 @@
                                 <div class="row mb-4">
                                     <label for="menu_url" class="col-sm-3 col-form-label">Menü Dosyası(PDF)</label>
                                     <div class="col-sm-9">
+                                        <label for="menu_url" class="col-sm-3 col-form-label">{{$record->menu_url}}</label>
+
                                         <div class="input-group">
-                                            <label for="menu_url" class="col-sm-3 col-form-label">{{$record->menu_url}}</label>
 
                                             <input type="file" class="form-control" id="menu_url" name="menu_url">
                                         </div>
