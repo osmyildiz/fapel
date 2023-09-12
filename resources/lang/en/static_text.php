@@ -49,8 +49,4 @@ return [
     'categories' => 'Categories',
     'recent_posts' => 'Recent Posts',
 
-
-
-
-
 ];

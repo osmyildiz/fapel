@@ -72,6 +72,7 @@
     <!-- jQuery önce yüklenmeli -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
 
     <!-- gallery area end -->
     <script>
@@ -82,9 +83,15 @@
 
     <script>
         $(document).ready(function() {
-            var $grid = $('.gallery-area-inner .row').isotope({
-                itemSelector: '.col-lg-3'
+            var $grid = $('.gallery-area-inner .row');
+
+            // Resimler yüklendiğinde Isotope'yu başlat
+            $grid.imagesLoaded().progress(function() {
+                $grid.isotope({
+                    itemSelector: '.col-lg-3'
+                });
             });
+
 
             $('.gf_btn').on('click', function() {
                 $('.gf_btn').removeClass('active');  // Tüm butonlardan 'active' sınıfını kaldır
