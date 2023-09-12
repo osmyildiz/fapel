@@ -29,14 +29,14 @@
                 </li>
                 <li >
                     <a href="/admin-contact">
-                        <i class="bx  bxs-user-detail"></i>
+                        <i class="bx  bxs-contact"></i>
                         <span key="t-crypto">İletişim</span>
                     </a>
 
                 </li>
                 <li >
                     <a href="/admin-branch">
-                        <i class="bx  bxs-user-detail"></i>
+                        <i class="bx  bx-git-branch"></i>
                         <span key="t-crypto">Şubeler</span>
                     </a>
 

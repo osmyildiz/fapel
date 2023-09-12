@@ -1252,6 +1252,9 @@ class AdminController extends Controller
         $record->name = $request->name;
         $record->phone = $request->phone;
         $record->address = $request->address;
+        $record->slug_tr = Str::slug($request->name);
+        $record->slug_en = Str::slug($request->name);
+        $record->slug_ar = Str::slug($request->name);
         $record->weekend_opening_time = $request->weekend_opening_time;
         $record->weekday_opening_time = $request->weekday_opening_time;
 
@@ -1310,6 +1313,9 @@ class AdminController extends Controller
         $record->name = $request->name;
         $record->phone = $request->phone;
         $record->address = $request->address;
+        $record->slug_tr = Str::slug($request->name);
+        $record->slug_en = Str::slug($request->name);
+        $record->slug_ar = Str::slug($request->name);
         $record->weekend_opening_time = $request->weekend_opening_time;
         $record->weekday_opening_time = $request->weekday_opening_time;
 
