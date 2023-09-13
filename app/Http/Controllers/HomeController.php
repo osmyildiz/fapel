@@ -63,7 +63,15 @@ class HomeController extends Controller
         $contact = Contact::find(1);
 
         $menu_categories = MenuCategory::where('is_active',1)->orderBy('priority','ASC')->get();
-        $menus = Menu::where('is_active',1)->orderBy('priority','ASC')->get();
+        $menus = Menu::
+            join('menu_categories', 'menus.category_id', '=', 'menu_categories.id')
+            ->where('menus.is_active', 1)
+            ->where('menu_categories.is_active', 1)
+            ->orderBy('menu_categories.priority', 'ASC')
+            ->orderBy('menus.priority', 'ASC')
+            ->select('menus.*') // sadece menus tablosundan tüm sütunları alıyoruz
+            ->get();
+
         $blogs = BlogPost::join('blog_categories','blog_categories.id','blog_posts.category_id')
             ->selectRaw('blog_categories.name_tr as category_name_tr,blog_categories.name_en as category_name_en,blog_categories.name_ar as category_name_ar,blog_posts.*')->where('blog_posts.is_active',1)
             ->orderBy('updated_at','DESC')
@@ -292,7 +300,14 @@ class HomeController extends Controller
         $seo = Seo::where('page_name','menu')
             ->first();
         $menu_categories = MenuCategory::where('is_active',1)->orderBy('priority','ASC')->get();
-        $menus = Menu::where('is_active',1)->orderBy('priority','ASC')->get();
+        $menus = Menu::
+        join('menu_categories', 'menus.category_id', '=', 'menu_categories.id')
+            ->where('menus.is_active', 1)
+            ->where('menu_categories.is_active', 1)
+            ->orderBy('menu_categories.priority', 'ASC')
+            ->orderBy('menus.priority', 'ASC')
+            ->select('menus.*') // sadece menus tablosundan tüm sütunları alıyoruz
+            ->get();
         $this->setSEO($seo);
 
         return view('menu',compact('menus','menu_categories','slider'));
